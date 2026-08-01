@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Operations Dashboard · 沈婧怡</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <span class="nav-brand">📊 HR Ops Dashboard</span>
+      <button class="nav-toggle" id="nav-toggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#funnel">招聘漏斗</a>
+        <a href="#workflow">AI工作流</a>
+        <a href="#tools">招聘工具</a>
+        <a href="#mapping">人才地图</a>
+        <a href="#method">评估方法</a>
+        <a href="#chat">AI助手</a>
+        <a href="#about">关于我</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="about">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">HR Intern @ NetEase Games</div>
+        <h1>沈婧怡</h1>
+        <p class="hero-subtitle">2027届 HR 候选人 · 结果导向 × 工具思维 × AI 实践</p>
+        <p class="hero-desc">湖南师范大学（211）会展经济与管理 2027届。英富曼企业管理（上海）HR 实习生，独立负责多城市全流程实习生招聘，周均面试 25 场，到岗率 90%；主导校园招聘项目，覆盖学生 300+ 人。网易 HR 实习生期间，专注游戏美术/策划/程序/测开多岗位招聘，深度参与 AI 寻访平台建设，月内推动 5 人至 offer 阶段，管道存量 16 人。</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-num">52</span>
+            <span class="stat-label">累计入职</span>
+            <span class="stat-source">Informa</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">300+</span>
+            <span class="stat-label">校招活动覆盖</span>
+            <span class="stat-source">Informa</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">16</span>
+            <span class="stat-label">管道活跃</span>
+            <span class="stat-source">网易</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">5</span>
+            <span class="stat-label">Offer 阶段</span>
+            <span class="stat-source">网易</span>
+          </div>
+        </div>
+        <div class="hero-contact">
+          <span>📧 3061006817@qq.com</span>
+          <span>📱 18257782205</span>
+          <span>📍 杭州</span>
+        </div>
+      </div>
+      <div class="hero-visual" id="wordcloud-chart"></div>
+    </div>
+  </header>
+
+  <!-- Pipeline Funnel -->
+  <section class="section" id="funnel">
+    <div class="section-header">
+      <h2>📈 招聘管道漏斗</h2>
+      <p class="section-desc">入职首月全流程数据追踪（2026.07 - 至今）</p>
+    </div>
+    <div class="funnel-grid">
+      <div class="funnel-chart" id="funnel-chart"></div>
+      <div class="funnel-detail">
+        <div class="metric-card accent-blue">
+          <div class="metric-icon">📞</div>
+          <div class="metric-body">
+            <div class="metric-value">250+</div>
+            <div class="metric-label">电话初筛</div>
+            <div class="metric-sub">日均10人</div>
+          </div>
+        </div>
+        <div class="metric-card accent-green">
+          <div class="metric-icon">📋</div>
+          <div class="metric-body">
+            <div class="metric-value">135+</div>
+            <div class="metric-label">推荐业务</div>
+            <div class="metric-sub">日均5-6人</div>
+          </div>
+        </div>
+        <div class="metric-card accent-orange">
+          <div class="metric-icon">✅</div>
+          <div class="metric-body">
+            <div class="metric-value">~88</div>
+            <div class="metric-label">业务初筛通过</div>
+            <div class="metric-sub">程序策划75-80% / 美术测试50-55%</div>
+          </div>
+        </div>
+        <div class="metric-card accent-purple clickable" onclick="openPipelinePanel('interview')">
+          <div class="metric-hint">👆 点击查看详情</div>
+          <div class="metric-icon">🔄</div>
+          <div class="metric-body">
+            <div class="metric-value">16</div>
+            <div class="metric-label">面试管道中</div>
+            <div class="metric-sub">持续推动中</div>
+          </div>
+        </div>
+        <div class="metric-card accent-red clickable" onclick="openPipelinePanel('offer')">
+          <div class="metric-hint">👆 点击查看详情</div>
+          <div class="metric-icon">🎯</div>
+          <div class="metric-body">
+            <div class="metric-value">5</div>
+            <div class="metric-label">Offer 阶段</div>
+            <div class="metric-sub">策划1人 · 程序2人 · 美术2人</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pipeline Detail Panels -->
+  <section class="section pipeline-detail-section" id="pipeline-detail" style="display:none;">
+    <div class="panel-header">
+      <div class="panel-title-row">
+        <h2 id="pipeline-panel-title">📋 面试管道追踪</h2>
+        <span class="panel-count-badge" id="pipeline-panel-count">16人</span>
+      </div>
+      <div class="panel-stats-bar" id="pipeline-stats-bar"></div>
+      <button class="panel-close-btn" onclick="closePipelinePanel()">✕ 收起</button>
+    </div>
+    <div class="panel-body-layout">
+      <aside class="warning-sidebar" id="warning-sidebar">
+        <div class="warning-sidebar-title">⚠️ 需要关注</div>
+        <div class="warning-list" id="warning-list"></div>
+        <div class="warning-empty" id="warning-empty">🎉 暂无预警</div>
+      </aside>
+      <div class="pipeline-table-wrap">
+        <div class="table-filter">
+          <button class="filter-btn active" data-filter="all">全部</button>
+          <button class="filter-btn" data-filter="critical">🔴 严重</button>
+          <button class="filter-btn" data-filter="warning">🟡 预警</button>
+          <button class="filter-btn" data-filter="normal">✅ 正常</button>
+        </div>
+        <table class="pipeline-table" id="pipeline-table">
+          <thead id="pipeline-thead"></thead>
+          <tbody id="pipeline-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Workflow -->
+  <section class="section section-dark" id="workflow">
+    <div class="section-header light">
+      <h2>🤖 AI 驱动寻访工作流</h2>
+      <p class="section-desc">从多渠道触达到精准推荐的全链路自动化</p>
+    </div>
+    <div class="workflow-container">
+      <div class="workflow-step">
+        <div class="step-icon">🔍</div>
+        <div class="step-content">
+          <h3>多渠道触达</h3>
+          <p>脉脉 · Boss直聘 · 网易内部人才库<br>AI寻访台批量扫描与初筛</p>
+        </div>
+      </div>
+      <div class="workflow-arrow"></div>
+      <div class="workflow-step">
+        <div class="step-icon">🤖</div>
+        <div class="step-content">
+          <h3>AI 初筛</h3>
+          <p>智能解析简历关键信息<br>人岗匹配度自动评估<br>一键批量打招呼</p>
+        </div>
+      </div>
+      <div class="workflow-arrow"></div>
+      <div class="workflow-step">
+        <div class="step-icon">📞</div>
+        <div class="step-content">
+          <h3>人工精筛</h3>
+          <p>日均10人电话初筛<br>意愿度·动机·薪资匹配<br>输出标准化评估报告</p>
+        </div>
+      </div>
+      <div class="workflow-arrow"></div>
+      <div class="workflow-step">
+        <div class="step-icon">📤</div>
+        <div class="step-content">
+          <h3>精准推荐</h3>
+          <p>企业梯队判定 · 项目匹配分析<br>优劣势评估 · 定向追问建议<br>数据化追踪全生命周期</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Platform Contribution -->
+    <div class="platform-card">
+      <div class="platform-badge">🏗️ AI 寻访台共建</div>
+      <p>与程序团队协作参与 AI 寻访台的<span class="highlight">调试与迭代</span>，从 HR 业务视角输出需求文档，推动<span class="highlight">一键批量打招呼</span>等核心功能落地。基于日常使用反馈持续优化产品体验。</p>
+      <div class="platform-tags">
+        <span class="tag">需求文档输出</span>
+        <span class="tag">功能测试反馈</span>
+        <span class="tag">体验优化迭代</span>
+        <span class="tag">跨团队协作</span>
+      </div>
+    </div>
+
+    <!-- CTA: Enter AI Platform -->
+    <div class="ai-cta">
+      <a href="platform.html" class="ai-cta-btn">🚀 进入 AI 寻访台 →</a>
+    </div>
+  </section>
+
+  <!-- Recruitment Tools -->
+  <section class="section section-tools" id="tools">
+    <div class="section-header">
+      <h2>🛠️ 招聘渠道助手</h2>
+      <p class="section-desc">Chrome 浏览器插件 · 打通 Boss直聘、脉脉、网易社招系统之间的简历上传与职位发布</p>
+      <div class="tools-badge-row">
+        <span class="tools-badge">🏗️ 云音乐招聘团队出品</span>
+        <span class="tools-badge">🔌 Chrome 扩展</span>
+      </div>
+    </div>
+
+    <div class="tools-cards">
+      <!-- Card 1: Job Posting -->
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <span class="tool-icon">📤</span>
+          <h3>职位发布</h3>
+        </div>
+        <div class="tool-steps">
+          <div class="tool-step">
+            <span class="step-num">1</span>
+            <span>打开社招系统职位详情页</span>
+          </div>
+          <div class="tool-step">
+            <span class="step-num">2</span>
+            <span>插件一键抓取职位信息</span>
+          </div>
+          <div class="tool-step">
+            <span class="step-num">3</span>
+            <span>自动填充到 Boss / 脉脉发布页</span>
+          </div>
+        </div>
+        <p class="tool-desc">同一个职位需在多个渠道发布？从 EHR 后台一键抓取职位名称、城市、学历、经验、职位描述等信息，自动填充到各平台发布页面，省去逐字段复制粘贴。</p>
+      </div>
+
+      <!-- Card 2: Resume Import -->
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <span class="tool-icon">📥</span>
+          <h3>简历转入</h3>
+        </div>
+        <div class="tool-steps">
+          <div class="tool-step">
+            <span class="step-num">1</span>
+            <span>Boss / 脉脉下载简历自动捕获</span>
+          </div>
+          <div class="tool-step">
+            <span class="step-num">2</span>
+            <span>插件面板统一管理待上传队列</span>
+          </div>
+          <div class="tool-step">
+            <span class="step-num">3</span>
+            <span>自动上传 EHR，智能匹配岗位</span>
+          </div>
+        </div>
+        <p class="tool-desc">在 Boss 或脉脉下载候选人简历后，插件自动捕获并加入上传队列。支持单条上传、批量上传、长按触发全自动模式，无需在多个系统间来回切换。</p>
+      </div>
+
+      <!-- Card 3: Highlights -->
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <span class="tool-icon">⚡</span>
+          <h3>效率亮点</h3>
+        </div>
+        <ul class="tool-features">
+          <li>📋 <b>批量操作</b> — 勾选多份简历一键上传</li>
+          <li>🔗 <b>岗位映射</b> — 自动记忆渠道岗位→EHR目标岗位对应关系</li>
+          <li>🤖 <b>全自动模式</b> — 长按「直接上传」2 秒即触发零人工干预流程</li>
+          <li>📎 <b>多格式支持</b> — PDF / DOC / DOCX / JPG / PNG / WebP / BMP</li>
+          <li>🔔 <b>版本提醒</b> — 底部铃铛图标提示插件更新</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tools-actions">
+      <a href="http://ehr-cdn.nos-jd.163yun.com/70c6bf3d78966cfd2d8a7e8978a4e132?download=talent-workflow-suite-1.0.2.zip" class="tools-dl-btn" target="_blank">📦 下载插件 (v1.0.2)</a>
+      <a href="https://mb-mlbclaw-pub.nos-jd.163yun.com/uploads/1785296761745_%E6%8B%9B%E8%81%98%E6%B8%A0%E9%81%93%E5%8A%A9%E6%89%8B_%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.docx" class="tools-guide-btn" target="_blank">📥 下载使用指南 (Word) →</a>
+    </div>
+  </section>
+
+  <!-- Talent Mapping -->
+  <section class="section" id="mapping">
+    <div class="section-header">
+      <h2>🗺️ 行业人才 Mapping</h2>
+      <p class="section-desc">覆盖 50+ 游戏厂商的 T0-T2 分级人才地图</p>
+    </div>
+    <div class="mapping-grid">
+      <div class="mapping-chart" id="position-chart"></div>
+      <div class="mapping-chart" id="gpt-chart"></div>
+    </div>
+    <div class="mapping-tier">
+      <div class="tier-card tier-0">
+        <h4>T0 · 第一梯队</h4>
+        <p>腾讯 · 米哈游 · 网易</p>
+      </div>
+      <div class="tier-card tier-1">
+        <h4>T1 · 第二梯队</h4>
+        <p>莉莉丝 · 叠纸 · 鹰角 · 字节 · 沐瞳 · 阿里 · 库洛 · 点点互动 · Funplus</p>
+      </div>
+      <div class="tier-card tier-2">
+        <h4>T2 · 第三梯队</h4>
+        <p>巨人 · 西山居 · 心动 · 完美 · Garena · 无端 · 深蓝互动 · 快手 · 乐元素 · 雷霆 · IGG · 蛮啾 · 散爆 · 祖龙 · 多益 · 盛趣 · 欢乐互娱 · 永航 · 友塔 · 元趣 · 智明星通 · 英雄互娱 · 游族 · 三七互娱 · 江娱互动 · 游卡 · Bilibili · 4399 · 途游 · 拳头 · EA · 育碧</p>
+      </div>
+    </div>
+    <div class="mapping-chart-full" id="trend-chart"></div>
+  </section>
+
+  <!-- Methodology -->
+  <section class="section section-light" id="method">
+    <div class="section-header">
+      <h2>🧩 全流程招聘交付</h2>
+      <p class="section-desc">从寻访到入职，每个环节均有真实交付记录</p>
+    </div>
+    <div class="method-banner"><span class="mb-icon">💡</span><span>日常通过 <b>Claude + OpenClaw</b> 完成候选人评估与推荐语生成，以下为工作流框架展示</span></div>
+
+    <div class="phase-flow">
+      <div class="phase-col">
+        <div class="phase-label">Phase 1 · 寻访与筛选</div>
+        <div class="phase-card">
+          <div class="pc-icon">🎯</div>
+          <strong>需求对齐 & 渠道策略</strong>
+          <p>与业务对齐岗位画像，制定脉脉/Boss/人才库多渠道寻访方案</p>
+        </div>
+        <div class="phase-card">
+          <div class="pc-icon">🤖</div>
+          <strong>AI 辅助初筛 & 电话评估</strong>
+          <p>AI 解析简历关键信息，日均 10 人电话沟通，评估意愿度与薪资匹配</p>
+        </div>
+      </div>
+      <div class="phase-col">
+        <div class="phase-label">Phase 2 · 评估与推荐</div>
+        <div class="phase-card">
+          <div class="pc-icon">🏢</div>
+          <strong>梯队判定 & 项目对标</strong>
+          <p>T0-T2 企业分级，项目经历与 JD 多维度交叉比对，输出匹配度</p>
+        </div>
+        <div class="phase-card">
+          <div class="pc-icon">📝</div>
+          <strong>标准化推荐输出</strong>
+          <p>结构化推荐语：背景→工作内容→薪资→流程状态，信息完整可对比</p>
+        </div>
+      </div>
+      <div class="phase-col">
+        <div class="phase-label">Phase 3 · 推进与收尾</div>
+        <div class="phase-card">
+          <div class="pc-icon">🔄</div>
+          <strong>面试推进 & 人选保温</strong>
+          <p>流程协调、面试官催办反馈闭环、竞争者动态追踪与意向维护</p>
+        </div>
+        <div class="phase-card">
+          <div class="pc-icon">💰</div>
+          <strong>谈薪 & Offer 交付</strong>
+          <p>薪资谈判、Offer 审批推进、背调与入职准备，全程跟进至到岗</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="method-case">
+      <div class="case-header">
+        <span class="case-badge">📋 全流程实战</span>
+        <span class="case-title">3D场景 · 李先生（西山居）· 薪资 33K×14 薪</span>
+      </div>
+      <div class="case-timeline">
+        <div class="ct-item">
+          <div class="ct-date">7月8日</div>
+          <div class="ct-dot"></div>
+          <div class="ct-body"><strong>寻访触达</strong> · 脉脉联系，当天加微信，确认意向城市深圳/杭州/成都</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date">7月9日</div>
+          <div class="ct-dot"></div>
+          <div class="ct-body"><strong>电话评估</strong> · 半小时间沟通，意愿明确，离职原因合理，即刻推进</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date">7月10日</div>
+          <div class="ct-dot"></div>
+          <div class="ct-body"><strong>梯队判定</strong> · T2 西山居 · 剑网3手绘国风 → 遗忘之海风格化 ✅ 高度匹配</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date">7月10日</div>
+          <div class="ct-dot"></div>
+          <div class="ct-body"><strong>推荐输出</strong> · 结构化推荐语交付业务，含全链路数据与匹配分析</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date">7月14日</div>
+          <div class="ct-dot"></div>
+          <div class="ct-body"><strong>业务反馈</strong> · 确认风格对口，约一面</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date">7月17日</div>
+          <div class="ct-dot"></div>
+          <div class="ct-body"><strong>一面通过</strong> · 催办反馈，约二面（主美）</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date">7月22日</div>
+          <div class="ct-dot"></div>
+          <div class="ct-body"><strong>二面完成</strong> · 持续跟进面试官评价</div>
+        </div>
+        <div class="ct-item">
+          <div class="ct-date">进行中</div>
+          <div class="ct-dot ct-dot-active"></div>
+          <div class="ct-body"><strong>保温 & 推进</strong> · 人选同时在面库洛鸣潮，持续意向维护；薪资 33K×14 薪（约 46.2 万），谈薪/Offer 推进中</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- AI Assistant Chat -->
+  <section class="section" id="chat">
+    <div class="section-header">
+      <h2>🤖 AI 招聘助手</h2>
+      <p class="section-desc">输入公司名称查梯队 · 输入候选人信息生成推荐语 · 自由提问</p>
+    </div>
+
+    <div class="chat-shortcuts">
+      <button class="shortcut-card" data-action="tier">
+        <span class="sc-icon">🏢</span>
+        <span class="sc-title">公司梯队</span>
+        <span class="sc-sub">输入公司名，判断T0/T1/T2</span>
+      </button>
+      <button class="shortcut-card" data-action="recommend">
+        <span class="sc-icon">📝</span>
+        <span class="sc-title">推荐语生成</span>
+        <span class="sc-sub">输入候选人信息，输出标准推荐语</span>
+      </button>
+      <button class="shortcut-card" data-action="free">
+        <span class="sc-icon">💬</span>
+        <span class="sc-title">自由提问</span>
+        <span class="sc-sub">招聘相关问题随时问</span>
+      </button>
+    </div>
+
+    <div class="chat-container">
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-msg ai">
+          <div class="msg-avatar">🤖</div>
+          <div class="msg-bubble">你好！我是 AI 招聘助手，可以帮你：<br>• 查询公司梯队（输入公司名即可）<br>• 生成标准化推荐语（提供候选人信息）<br>• 回答招聘相关问题<br><br>试试输入一个公司名称开始吧 👇</div>
+        </div>
+      </div>
+      <div class="chat-input-bar">
+        <input type="text" id="chat-input" class="chat-input" placeholder="输入公司名称、候选人信息或问题..." autocomplete="off">
+        <button id="chat-send" class="chat-send-btn">发送</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 沈婧怡 · AI + HR 融合实践者</p>
+    <p>本看板为个人作品展示，所有候选人数据均已脱敏处理</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/pipeline.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>
