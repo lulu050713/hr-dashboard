@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HR Operations Dashboard · 沈婧怡</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+  <title>沈婧怡 · HR Portfolio</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✿</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -15,7 +18,7 @@
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-inner">
-      <span class="nav-brand">📊 HR Ops Dashboard</span>
+      <span class="nav-brand">沈婧怡 · Portfolio</span>
       <button class="nav-toggle" id="nav-toggle" aria-label="菜单">
         <span></span><span></span><span></span>
       </button>
@@ -62,9 +65,9 @@
           </div>
         </div>
         <div class="hero-contact">
-          <span>📧 3061006817@qq.com</span>
-          <span>📱 18257782205</span>
-          <span>📍 杭州</span>
+          <span>3061006817@qq.com</span>
+          <span>18257782205</span>
+          <span>杭州</span>
         </div>
       </div>
       <div class="hero-visual" id="wordcloud-chart"></div>
@@ -74,7 +77,8 @@
   <!-- Pipeline Funnel -->
   <section class="section" id="funnel">
     <div class="section-header">
-      <h2>📈 招聘管道漏斗</h2>
+      <div class="section-marker"><span class="marker-num">01</span><span class="marker-line"></span></div>
+      <h2>招聘管道漏斗</h2>
       <p class="section-desc">入职首月全流程数据追踪（2026.07 - 至今）</p>
     </div>
     <div class="funnel-grid">
@@ -130,7 +134,7 @@
   <section class="section pipeline-detail-section" id="pipeline-detail" style="display:none;">
     <div class="panel-header">
       <div class="panel-title-row">
-        <h2 id="pipeline-panel-title">📋 面试管道追踪</h2>
+        <h2 id="pipeline-panel-title">面试管道追踪</h2>
         <span class="panel-count-badge" id="pipeline-panel-count">16人</span>
       </div>
       <div class="panel-stats-bar" id="pipeline-stats-bar"></div>
@@ -160,7 +164,8 @@
   <!-- AI Workflow -->
   <section class="section section-dark" id="workflow">
     <div class="section-header light">
-      <h2>🤖 AI 驱动寻访工作流</h2>
+      <div class="section-marker"><span class="marker-num">02</span><span class="marker-line"></span></div>
+      <h2>AI 驱动寻访工作流</h2>
       <p class="section-desc">从多渠道触达到精准推荐的全链路自动化</p>
     </div>
     <div class="workflow-container">
@@ -199,7 +204,7 @@
 
     <!-- AI Platform Contribution -->
     <div class="platform-card">
-      <div class="platform-badge">🏗️ AI 寻访台共建</div>
+      <div class="platform-badge">AI 寻访台共建</div>
       <p>与程序团队协作参与 AI 寻访台的<span class="highlight">调试与迭代</span>，从 HR 业务视角输出需求文档，推动<span class="highlight">一键批量打招呼</span>等核心功能落地。基于日常使用反馈持续优化产品体验。</p>
       <div class="platform-tags">
         <span class="tag">需求文档输出</span>
@@ -211,18 +216,19 @@
 
     <!-- CTA: Enter AI Platform -->
     <div class="ai-cta">
-      <a href="platform.html" class="ai-cta-btn">🚀 进入 AI 寻访台 →</a>
+      <a href="platform.html" class="ai-cta-btn">进入 AI 寻访台 →</a>
     </div>
   </section>
 
   <!-- Recruitment Tools -->
   <section class="section section-tools" id="tools">
     <div class="section-header">
-      <h2>🛠️ 招聘渠道助手</h2>
+      <div class="section-marker"><span class="marker-num">03</span><span class="marker-line"></span></div>
+      <h2>招聘渠道助手</h2>
       <p class="section-desc">Chrome 浏览器插件 · 打通 Boss直聘、脉脉、网易社招系统之间的简历上传与职位发布</p>
       <div class="tools-badge-row">
-        <span class="tools-badge">🏗️ 云音乐招聘团队出品</span>
-        <span class="tools-badge">🔌 Chrome 扩展</span>
+        <span class="tools-badge">云音乐招聘团队出品</span>
+        <span class="tools-badge">Chrome 扩展</span>
       </div>
     </div>
 
@@ -290,15 +296,16 @@
     </div>
 
     <div class="tools-actions">
-      <a href="http://ehr-cdn.nos-jd.163yun.com/70c6bf3d78966cfd2d8a7e8978a4e132?download=talent-workflow-suite-1.0.2.zip" class="tools-dl-btn" target="_blank">📦 下载插件 (v1.0.2)</a>
-      <a href="https://mb-mlbclaw-pub.nos-jd.163yun.com/uploads/1785296761745_%E6%8B%9B%E8%81%98%E6%B8%A0%E9%81%93%E5%8A%A9%E6%89%8B_%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.docx" class="tools-guide-btn" target="_blank">📥 下载使用指南 (Word) →</a>
+      <a href="http://ehr-cdn.nos-jd.163yun.com/70c6bf3d78966cfd2d8a7e8978a4e132?download=talent-workflow-suite-1.0.2.zip" class="tools-dl-btn" target="_blank">下载插件 (v1.0.2)</a>
+      <a href="https://mb-mlbclaw-pub.nos-jd.163yun.com/uploads/1785296761745_%E6%8B%9B%E8%81%98%E6%B8%A0%E9%81%93%E5%8A%A9%E6%89%8B_%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.docx" class="tools-guide-btn" target="_blank">下载使用指南 (Word) →</a>
     </div>
   </section>
 
   <!-- Talent Mapping -->
   <section class="section" id="mapping">
     <div class="section-header">
-      <h2>🗺️ 行业人才 Mapping</h2>
+      <div class="section-marker"><span class="marker-num">04</span><span class="marker-line"></span></div>
+      <h2>行业人才 Mapping</h2>
       <p class="section-desc">覆盖 50+ 游戏厂商的 T0-T2 分级人才地图</p>
     </div>
     <div class="mapping-grid">
@@ -325,10 +332,11 @@
   <!-- Methodology -->
   <section class="section section-light" id="method">
     <div class="section-header">
-      <h2>🧩 全流程招聘交付</h2>
+      <div class="section-marker"><span class="marker-num">05</span><span class="marker-line"></span></div>
+      <h2>全流程招聘交付</h2>
       <p class="section-desc">从寻访到入职，每个环节均有真实交付记录</p>
     </div>
-    <div class="method-banner"><span class="mb-icon">💡</span><span>日常通过 <b>Claude + OpenClaw</b> 完成候选人评估与推荐语生成，以下为工作流框架展示</span></div>
+    <div class="method-banner"><span class="mb-icon">*</span><span>日常通过 <b>Claude + OpenClaw</b> 完成候选人评估与推荐语生成，以下为工作流框架展示</span></div>
 
     <div class="phase-flow">
       <div class="phase-col">
@@ -374,7 +382,7 @@
 
     <div class="method-case">
       <div class="case-header">
-        <span class="case-badge">📋 全流程实战</span>
+        <span class="case-badge">全流程实战</span>
         <span class="case-title">3D场景 · 李先生（西山居）· 薪资 33K×14 薪</span>
       </div>
       <div class="case-timeline">
@@ -425,7 +433,8 @@
 <!-- AI Assistant Chat -->
   <section class="section" id="chat">
     <div class="section-header">
-      <h2>🤖 AI 招聘助手</h2>
+      <div class="section-marker"><span class="marker-num">06</span><span class="marker-line"></span></div>
+      <h2>AI 招聘助手</h2>
       <p class="section-desc">输入公司名称查梯队 · 输入候选人信息生成推荐语 · 自由提问</p>
     </div>
 
@@ -473,5 +482,6 @@
   <script src="js/chat.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/animations.js"></script>
+  <script src="js/interactions.js"></script>
 </body>
 </html>

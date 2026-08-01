@@ -1,22 +1,19 @@
 // Dashboard Charts & AI Chat
 
-// Color palette
+// Color palette — Blue/Indigo
 const COLORS = {
   blue: '#3b82f6',
   indigo: '#6366f1',
-  purple: '#8b5cf6',
-  pink: '#ec4899',
-  red: '#ef4444',
-  orange: '#f97316',
-  amber: '#f59e0b',
-  green: '#10b981',
-  teal: '#14b8a6',
-  cyan: '#06b6d4',
-  slate: '#64748b',
+  violet: '#8b5cf6',
+  purple: '#a855f7',
+  fuchsia: '#d946ef',
+  dark: '#1e1b4b',
+  gray: '#64748b',
+  sky: '#38bdf8',
 };
 
 const GRADIENT = ['#3b82f6', '#6366f1', '#8b5cf6', '#a855f7', '#d946ef'];
-const GRADIENT_FULL = ['#3b82f6','#6366f1','#8b5cf6','#a855f7','#d946ef','#ec4899','#f43f5e','#f97316','#f59e0b','#10b981','#14b8a6','#06b6d4','#64748b','#475569'];
+const GRADIENT_FULL = ['#3b82f6','#6366f1','#8b5cf6','#a855f7','#d946ef','#818cf8','#a78bfa','#c084fc','#e879f9','#38bdf8','#7c3aed','#4f46e5','#2563eb','#7dd3fc'];
 
 // ==========================================
 // 1. Position Word Cloud (Hero Section)
@@ -42,13 +39,13 @@ function initWordCloud() {
       drawOutOfBound: false,
       layoutAnimation: true,
       textStyle: {
-        fontFamily: 'PingFang SC, Microsoft YaHei, sans-serif',
+        fontFamily: 'Plus Jakarta Sans, Inter, PingFang SC, Microsoft YaHei, sans-serif',
         fontWeight: 'bold',
         color: function () {
           const colors = [
-            '#3b82f6','#6366f1','#8b5cf6','#a855f7','#ec4899',
-            '#f43f5e','#f97316','#f59e0b','#10b981','#14b8a6',
-            '#06b6d4','#0ea5e9','#64748b','#475569'
+            '#3b82f6','#6366f1','#8b5cf6','#a855f7','#d946ef',
+            '#818cf8','#a78bfa','#c084fc','#e879f9','#38bdf8',
+            '#7c3aed','#4f46e5','#2563eb','#1e1b4b'
           ];
           return colors[Math.floor(Math.random() * colors.length)];
         }
@@ -145,9 +142,9 @@ function initGPTChart() {
       itemStyle: { borderRadius: 6 },
       label: { fontSize: 11, formatter: '{b}\n{c}人 ({d}%)' },
       data: [
-        { value: 78, name: 'GPT人才', itemStyle: { color: '#10b981' } },
-        { value: 42, name: '非GPT', itemStyle: { color: '#94a3b8' } },
-        { value: 8, name: '待确认', itemStyle: { color: '#f59e0b' } }
+        { value: 78, name: 'GPT人才', itemStyle: { color: '#6366f1' } },
+        { value: 42, name: '非GPT', itemStyle: { color: '#64748b' } },
+        { value: 8, name: '待确认', itemStyle: { color: '#a855f7' } }
       ]
     }]
   };
@@ -174,12 +171,12 @@ function initTrendChart() {
     series: [
       {
         name: '新增人选', type: 'bar', data: newCandidates,
-        itemStyle: { color: '#6366f1', borderRadius: [4,4,0,0] }, barWidth: 12
+        itemStyle: { color: '#6366f1', borderRadius: [6,6,0,0] }, barWidth: 14
       },
       {
         name: '电话沟通', type: 'line', data: calls,
-        smooth: true, lineStyle: { color: '#f59e0b', width: 2 },
-        symbol: 'circle', symbolSize: 4, itemStyle: { color: '#f59e0b' }
+        smooth: true, lineStyle: { color: '#a855f7', width: 2.5 },
+        symbol: 'circle', symbolSize: 5, itemStyle: { color: '#a855f7' }
       }
     ]
   };
