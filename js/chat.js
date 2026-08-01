@@ -1,6 +1,9 @@
 // AI Chat — handles message sending, local tier lookup, and DeepSeek API calls
 (function() {
-  var API_URL = 'https://hr-query.3061006817.workers.dev';
+  var DEEPSEEK_URL = 'https://api.deepseek.com/chat/completions';
+  var DEEPSEEK_KEY = 'sk-458dd295dfc2493fa139afe30172f3dd';
+  var SYSTEM_PROMPT = '你是网易游戏HR招聘助手，专注于游戏行业人才招聘。你的能力：\n\n1. **公司梯队判定**：\n- T0（第一梯队）：腾讯、网易、米哈游\n- T1（第二梯队）：莉莉丝、叠纸、鹰角、字节、沐瞳、阿里、库洛、点点互动、Funplus\n- T2（第三梯队）：巨人、西山居、心动、完美世界、Garena、无端、深蓝互动、快手、乐元素、雷霆、IGG、蛮啾、散爆、祖龙、多益、盛趣、欢乐互娱、永航、友塔、元趣、智明星通、英雄互娱、游族、三七互娱、江娱互动、游卡、Bilibili、4399、途游、拳头、EA、育碧\n判定依据：团队规模、产品营收、行业口碑、技术实力。\n\n2. **推荐语生成**模板：\n推荐一名[岗位]人选\n1、[姓名]，[公司]在职/离职，意向[城市]；看机会原因：[原因]。\n2、[公司]（GPT/非GPT）[年限]，负责[核心职责]；团队[规模]。风格：[描述]。AI使用：[情况]。\n3、薪资：[金额]×[薪数]。\n4、[其他流程]；游戏体验：[游戏列表]。\n\n3. **招聘问答**：回答游戏行业招聘相关问题。\n\n回答简洁专业，使用中文。如果用户只输入公司名，直接给出梯队判定和简要分析。';
+
   var messagesEl = document.getElementById('chat-messages');
   var inputEl = document.getElementById('chat-input');
   var sendBtn = document.getElementById('chat-send');
@@ -87,24 +90,37 @@
 
     history.push({ role: 'user', content: text });
 
-    fetch(API_URL, {
+    var messages = [{ role: 'system', content: SYSTEM_PROMPT }];
+    history.slice(-6).forEach(function(msg) {
+      messages.push({ role: msg.role, content: msg.content });
+    });
+
+    fetch(DEEPSEEK_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: text, history: history.slice(-6) })
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + DEEPSEEK_KEY
+      },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        messages: messages,
+        max_tokens: 1024,
+        temperature: 0.7
+      })
     })
     .then(function(res) { return res.json(); })
     .then(function(data) {
       removeTyping();
-      if (data.success && data.reply) {
-        appendMessage('ai', data.reply);
-        history.push({ role: 'assistant', content: data.reply });
+      var reply = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+      if (reply) {
+        appendMessage('ai', reply);
+        history.push({ role: 'assistant', content: reply });
       } else {
         appendMessage('ai', '⚠️ AI 服务暂时不可用，请稍后重试。\n\n提示：公司梯队查询可离线使用，直接输入公司名即可。');
       }
     })
     .catch(function() {
       removeTyping();
-      // If local lookup returned the "not found" message, provide a fallback
       appendMessage('ai', '⚠️ AI 服务连接失败。\n\n💡 离线可用功能：\n• 直接输入公司名称查梯队（如"西山居"、"米哈游"）\n• 本地数据覆盖 30+ 游戏公司\n\n网络恢复后即可使用推荐语生成等 AI 功能。');
     })
     .finally(function() {
