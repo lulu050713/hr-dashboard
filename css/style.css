@@ -432,6 +432,12 @@ body {
   border-top: 1px solid var(--border);
 }
 .footer p + p { margin-top: 4px; }
+.footer-personal { margin-top: 12px; }
+.footer-personal a { color: #d44b3c; text-decoration: none; font-weight: 500; transition: opacity 0.3s; }
+.footer-personal a:hover { opacity: 0.7; }
+
+/* External link hover */
+.nav-links a[target="_blank"]:hover { color: #d44b3c; }
 
 /* === Pipeline Detail Panel === */
 .pipeline-detail-section {
