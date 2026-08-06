@@ -24,7 +24,7 @@ function initWordCloud() {
   const chart = echarts.init(dom);
 
   const option = {
-    tooltip: { show: true, formatter: '{b}: {c}人' },
+    tooltip: { show: true, formatter: '{b}' },
     series: [{
       type: 'wordCloud',
       shape: 'circle',
