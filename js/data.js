@@ -6,100 +6,131 @@ const CANDIDATE_DATA = {
   // === 招聘漏斗总览 ===
   pipeline: {
     stages: [
-      { name: '电话初筛', value: 250, desc: '日均10人' },
-      { name: '推荐业务', value: 195, desc: '日均5-6人（稳态）' },
-      { name: '业务通过', value: 88, desc: '程序策划75-80% / 美术50-55%' },
-      { name: '面试推进', value: 21, desc: '5 Offer + 16 面试中' },
-      { name: '已入职', value: 4, desc: '7.5周内交付' }
+      { name: '电话初筛', value: 350, desc: '日均9-10人' },
+      { name: '推荐业务', value: 225, desc: '日均6.0（程序3.7+美术7.7）' },
+      { name: '业务通过/约面', value: 149, desc: '程序85% / 美术60%' },
+      { name: '面试推进', value: 82, desc: '一面完成（美术含测试环节）' },
+      { name: 'Offer/入职', value: 6, desc: '5已入职 + 1拒绝' }
     ]
   },
 
   // === 入职战绩 ===
   onboarding: [
-    { name: '阿里P6人选', position: '程序方向', salary: '40万/年', cycle: '10工作日三面入职', highlight: '极速标杆' },
-    { name: '外部人选', position: '战斗策划', salary: '24万/年', cycle: '常规流程', highlight: '策划线产出' },
+    { name: '阿里P6人选', position: '后端开发', salary: '40万/年', cycle: '10工作日三面入职', highlight: '极速标杆' },
+    { name: '外部人选', position: '测试开发', salary: '78万年包', cycle: '四面完成', highlight: '高薪突破' },
+    { name: '外部人选', position: '战斗策划', salary: '24万/年', cycle: '常规流程', highlight: '策划线首单' },
     { name: '外部人选', position: '资深3D角色', salary: 'P4级别', cycle: '常规流程', highlight: '美术线产出' },
     { name: '外部人选', position: '场景原画', salary: 'P4级别', cycle: '常规流程', highlight: '美术线产出' },
   ],
 
-  // === 岗位分布 ===
-  positions: [
-    { name: '角色原画', value: 30 },
-    { name: '3D角色', value: 25 },
-    { name: 'UI设计', value: 22 },
-    { name: '3D场景', value: 20 },
-    { name: '场景原画', value: 18 },
-    { name: '地编', value: 15 },
-    { name: '动作', value: 14 },
-    { name: '特效', value: 8 },
-    { name: '程序/测开', value: 15 },
-    { name: '策划', value: 8 },
-    { name: 'TA/灯光/关卡/其他', value: 20 }
+  // === 完整转化漏斗 ===
+  conversionFunnel: [
+    { stage: '电话初筛', programVal: 90, artVal: 260, total: 350, rate: '—' },
+    { stage: '推荐业务', programVal: 55, artVal: 170, total: 225, rate: '64%' },
+    { stage: '业务通过', programVal: 47, artVal: 102, total: 149, rate: '程序85%/美术60%' },
+    { stage: '测试回收(美术)', programVal: '—', artVal: 78, total: '—', rate: '完成率76%' },
+    { stage: '测试通过/约一面', programVal: 47, artVal: 52, total: 99, rate: '美术通过67%' },
+    { stage: '一面完成', programVal: 42, artVal: 40, total: 82, rate: '—' },
+    { stage: '一面通过→二面', programVal: 25, artVal: 22, total: 47, rate: '程序60%/美术55%' },
+    { stage: '二面完成', programVal: 23, artVal: 16, total: 39, rate: '—' },
+    { stage: '二面通过', programVal: 14, artVal: 9, total: 23, rate: '程序61%/美术56%' },
+    { stage: '三面/终面', programVal: 9, artVal: 3, total: 12, rate: '—' },
+    { stage: '三面通过', programVal: 6, artVal: 3, total: 9, rate: '程序67%/美术100%' },
+    { stage: 'Offer发放', programVal: 4, artVal: 2, total: 6, rate: '—' },
+    { stage: 'Offer拒绝', programVal: 1, artVal: 0, total: 1, rate: '—' },
+    { stage: '已入职', programVal: 3, artVal: 2, total: 5, rate: '—' },
   ],
 
-  // === GPT 人才统计 ===
-  gpt: [
-    { name: 'GPT人才', value: 120 },
-    { name: '非GPT', value: 62 },
-    { name: '待确认', value: 13 }
-  ],
-
-  // === GPT 层级分布 ===
-  gptTier: [
-    { name: 'T0（腾讯/米哈游/网易）', value: 8 },
-    { name: 'T1（莉莉丝/叠纸/鹰角等）', value: 42 },
-    { name: 'T2（巨人/西山居/心动等）', value: 70 }
-  ],
-
-  // === 日度活跃趋势 (7/8 - 8/7) ===
-  dailyActivity: {
-    dates: ['7/8', '7/9', '7/10', '7/13', '7/14', '7/15', '7/16', '7/17', '7/21', '7/22', '7/23', '7/24', '7/27', '7/28', '7/29', '7/30', '7/31', '8/4'],
-    newCandidates: [12, 15, 3, 9, 5, 7, 8, 6, 4, 7, 5, 8, 7, 2, 5, 3, 3, 1],
-    calls: [10, 10, 10, 12, 8, 10, 10, 8, 10, 10, 10, 8, 10, 8, 10, 10, 8, 8]
-  },
-
-  // === 周度产出 ===
-  weeklyActivity: [
-    { week: 'W1 (7.7-7.11)', recommend: 22, dailyAvg: '4.4', note: '美术切入，搭建渠道' },
-    { week: 'W2 (7.13-7.17)', recommend: 30, dailyAvg: '6.0', note: '🔥 峰值周' },
-    { week: 'W3 (7.20-7.24)', recommend: 28, dailyAvg: '5.6', note: '稳态运行' },
-    { week: 'W4 (7.27-7.31)', recommend: 23, dailyAvg: '4.6', note: '月底收口' },
-    { week: '程序策划期 (6.16-7.6)', recommend: 35, dailyAvg: '2.3', note: '市场窄、人选稀缺' },
+  // === 面试淘汰/流失分布 ===
+  attrition: [
+    { stage: '业务不通过', count: 76, reason: '项目经历不匹配/岗位风格不符/资历不够' },
+    { stage: '美术测试未完成', count: 24, reason: '2周周期内放弃或未按时提交' },
+    { stage: '美术测试未通过', count: 26, reason: '测试作品质量不达标' },
+    { stage: '一面淘汰', count: 35, reason: '技术深度不足/项目描述浅/沟通表达' },
+    { stage: '二面淘汰', count: 16, reason: '风格匹配度不够/团队协作适配/主美不认可' },
+    { stage: '三面淘汰', count: 3, reason: '薪资预期差距/管理风格' },
+    { stage: '流程慢候选人流失', count: 3, reason: '二面后推进慢 候选人接受其他offer' },
+    { stage: 'HC冻结流失', count: 1, reason: '三面通过 项目公测数据不好HC暂停' },
+    { stage: 'Offer拒绝', count: 1, reason: '接受腾讯竞争offer' },
   ],
 
   // === 分阶段数据 ===
   phaseData: [
-    { phase: '程序&策划期', period: '6.16-7.7 (3周)', recommend: 35, dailyAvg: '2.3', onboarded: 2, note: '程序/策划/测开' },
-    { phase: '美术期', period: '7.7-8.7 (4周+)', recommend: 160, dailyAvg: '5.3', onboarded: 2, note: '9个美术细分方向' },
+    { phase: '程序&策划期', period: '6.16-7.7 (3周)', recommend: 55, dailyAvg: '3.7', onboarded: 3, note: '程序/策划/测开，无测试环节' },
+    { phase: '美术期', period: '7.7-8.7 (4.5周)', recommend: 170, dailyAvg: '7.7', onboarded: 2, note: '9个细分方向，含2周测试周期' },
   ],
 
-  // === 转化漏斗 ===
-  conversionFunnel: [
-    { stage: '电话初筛', value: 250, rate: '—' },
-    { stage: '推荐业务', value: 195, rate: '78%' },
-    { stage: '业务通过', value: 88, rate: '45%' },
-    { stage: '面试管线', value: 21, rate: '24%' },
-    { stage: 'Offer阶段', value: 5, rate: '24%' },
-    { stage: '已入职', value: 4, rate: '—' },
+  // === 美术测试瓶颈时间线 ===
+  artTimeline: [
+    { batch: 'W1批', period: '7.7-7.11', count: 30, testDue: '~7.23', maxStage: '三面/Offer', status: '2人入职 1人冻结流失' },
+    { batch: 'W2批', period: '7.14-7.18', count: 38, testDue: '~7.30', maxStage: '一面/二面', status: '部分二面中 流程变慢' },
+    { batch: 'W3批', period: '7.21-7.25', count: 35, testDue: '~8.6', maxStage: '测试刚过/开始一面', status: '刚进入面试' },
+    { batch: 'W4批', period: '7.28-8.7', count: 67, testDue: '8.7之后', maxStage: '测试制作中', status: '大量堆积' },
   ],
 
-  // === 效率对标 ===
-  efficiencyBench: [
-    { metric: '日均推荐（稳态）', value: '5-6人', benchmark: '3-5人', result: '🔥 优秀' },
-    { metric: '峰值日产能', value: '8人', benchmark: '5-8人', result: '🔥 触顶' },
-    { metric: '周推荐（稳态）', value: '25-30人', benchmark: '15-25人', result: '🔥 突出' },
-    { metric: '程序极速闭环', value: '10工作日', benchmark: '20-30天', result: '🔥 标杆' },
-    { metric: '推荐→面试转化', value: '28%', benchmark: '25-35%', result: '✅ 中上' },
-    { metric: '推荐→入职转化', value: '2.1%', benchmark: '2-5%', result: '✅ 合理' },
-    { metric: '入职产出', value: '4人/7.5周', benchmark: '2-3人', result: '🔥 高于均值' },
+  // === 周度产出 ===
+  weeklyActivity: [
+    { week: 'W1 (6.16-6.20)', recommend: 15, dailyAvg: '3.0', note: '程序策划启动，搭建渠道' },
+    { week: 'W2 (6.23-6.27)', recommend: 20, dailyAvg: '4.0', note: '稳态爬坡' },
+    { week: 'W3 (6.30-7.4)', recommend: 20, dailyAvg: '4.0', note: '程序稳态+策划补充' },
+    { week: 'W4 (7.7-7.11)', recommend: 30, dailyAvg: '6.0', note: '美术切入，双线并行' },
+    { week: 'W5 (7.14-7.18)', recommend: 38, dailyAvg: '7.6', note: '🔥 峰值周' },
+    { week: 'W6 (7.21-7.25)', recommend: 35, dailyAvg: '7.0', note: '稳态高位' },
+    { week: 'W7 (7.28-8.1)', recommend: 38, dailyAvg: '7.6', note: '🔥 峰值周' },
+    { week: 'W8 (8.4-8.7)', recommend: 29, dailyAvg: '7.3', note: '4天，维持高位' },
   ],
+
+  // === 活跃管线快照 ===
+  activePipeline: [
+    { stage: '测试制作中', count: '~50', note: 'W4批次为主 测试未到期' },
+    { stage: '测试待评审', count: '~12', note: 'W3批次 刚回收' },
+    { stage: '一面中/待约', count: '~10', note: 'W3测试通过+W2剩余' },
+    { stage: '二面中/待约', count: '~5', note: 'W2批次' },
+    { stage: '三面待反馈/冻结', count: '~1', note: 'W1批次 HC暂停' },
+  ],
+
+  // === 岗位分布 ===
+  positions: [
+    { name: '角色原画', value: 35 },
+    { name: '3D角色', value: 30 },
+    { name: '程序/测开', value: 25 },
+    { name: 'UI设计', value: 25 },
+    { name: '3D场景', value: 24 },
+    { name: '场景原画', value: 22 },
+    { name: '地编', value: 18 },
+    { name: '动作', value: 16 },
+    { name: '策划', value: 10 },
+    { name: '特效', value: 10 },
+    { name: 'TA/灯光/关卡/其他', value: 10 }
+  ],
+
+  // === GPT 人才统计 ===
+  gpt: [
+    { name: 'GPT人才', value: 138 },
+    { name: '非GPT', value: 70 },
+    { name: '待确认', value: 17 }
+  ],
+
+  // === GPT 层级分布 ===
+  gptTier: [
+    { name: 'T0（腾讯/米哈游/网易）', value: 10 },
+    { name: 'T1（莉莉丝/叠纸/鹰角等）', value: 48 },
+    { name: 'T2（巨人/西山居/心动等）', value: 80 }
+  ],
+
+  // === 日度活跃趋势 ===
+  dailyActivity: {
+    dates: ['6/16','6/17','6/18','6/19','6/20','6/23','6/24','6/25','6/26','6/27','6/30','7/1','7/2','7/3','7/4','7/7','7/8','7/9','7/10','7/11','7/14','7/15','7/16','7/17','7/18','7/21','7/22','7/23','7/24','7/25','7/28','7/29','7/30','7/31','8/1','8/4','8/5','8/6','8/7'],
+    newCandidates: [2,3,3,4,3,4,4,4,4,4,4,4,4,4,4,5,6,7,6,6,8,8,7,8,7,7,7,7,7,7,8,8,7,8,7,7,8,7,7],
+    calls: [6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,10,10,10,10,10,12,12,12,12,12,12,12,10,10,10,12,12,12,10,10,10,10,10,8]
+  },
 
   // === 招聘渠道 ===
   channels: [
-    { name: '脉脉', value: 90 },
-    { name: 'Boss直聘', value: 60 },
-    { name: '内部人才库', value: 30 },
-    { name: '其他渠道', value: 15 },
+    { name: '脉脉', value: 100 },
+    { name: 'Boss直聘', value: 70 },
+    { name: '内部人才库', value: 35 },
+    { name: '其他渠道', value: 20 },
   ],
 
   // === Word Cloud ===
@@ -215,11 +246,12 @@ const CANDIDATE_DATA = {
       { id: 16, name: '许女士', position: '灯光', stage: '一面待评价', stageDate: '2026-07-31', round: 1, timeline: [{ date: '7/31', action: '一面完成', detail: '业务面试官面试完成' }, { date: '8/3', action: '催办', detail: '企业微信提醒' }] }
     ],
     offer: [
-      { id: 101, name: '杨先生', direction: '策划', position: '战斗策划', stage: '审批中', stageDate: '2026-07-31', round: 0, timeline: [{ date: '7/31', action: '发起Offer审批', detail: '部门leader已批，等HRBP审批' }] },
-      { id: 102, name: '王先生', direction: '程序', position: '测试', stage: '审批中', stageDate: '2026-07-25', round: 0, timeline: [{ date: '7/25', action: '发起Offer审批', detail: '薪资超预算需特批' }, { date: '7/29', action: '升级处理', detail: '已提交特批申请至HRD' }, { date: '8/2', action: '跟进', detail: 'HRD已阅，待最终批复' }] },
-      { id: 103, name: '梁先生', direction: '程序', position: '测开', stage: '待入职', stageDate: '2026-08-12', round: 0, timeline: [{ date: '7/28', action: 'Offer确认', detail: '人选已接受Offer' }, { date: '8/1', action: '入职准备', detail: '已收集入职材料，背调进行中' }] },
-      { id: 104, name: '李女士', direction: '美术', position: '场景原画', stage: 'Offer已发', stageDate: '2026-08-04', round: 0, timeline: [{ date: '8/4', action: 'Offer发放', detail: '已发送正式Offer' }] },
-      { id: 105, name: '唐先生', direction: '美术', position: '3D角色', stage: '审批中', stageDate: '2026-08-01', round: 0, timeline: [{ date: '8/1', action: '发起Offer审批', detail: '正常流程中' }] }
+      { id: 101, name: '杨先生', direction: '策划', position: '战斗策划', stage: '已入职', stageDate: '2026-07-20', round: 0, timeline: [{ date: '7/15', action: 'Offer发放', detail: '常规流程' }, { date: '7/20', action: '入职', detail: '策划线首单' }] },
+      { id: 102, name: '王先生', direction: '程序', position: '后端开发(阿里P6)', stage: '已入职', stageDate: '2026-07-02', round: 0, timeline: [{ date: '6/20', action: '推荐', detail: '阿里P6背景' }, { date: '7/2', action: '入职', detail: '10工作日极速三面入职' }] },
+      { id: 103, name: '梁先生', direction: '程序', position: '测试开发', stage: '已入职', stageDate: '2026-07-28', round: 0, timeline: [{ date: '7/10', action: 'Offer发放', detail: '78万年包 四面完成' }, { date: '7/28', action: '入职', detail: '高薪突破' }] },
+      { id: 104, name: '李女士', direction: '美术', position: '场景原画', stage: '已入职', stageDate: '2026-08-04', round: 0, timeline: [{ date: '7/30', action: 'Offer发放', detail: 'P4级别' }, { date: '8/4', action: '入职', detail: '美术线产出' }] },
+      { id: 105, name: '唐先生', direction: '美术', position: '资深3D角色', stage: '已入职', stageDate: '2026-08-01', round: 0, timeline: [{ date: '7/25', action: 'Offer发放', detail: 'P4级别' }, { date: '8/1', action: '入职', detail: '美术线产出' }] },
+      { id: 106, name: '陈先生', direction: '程序', position: '后端开发', stage: 'Offer拒绝', stageDate: '2026-07-08', round: 0, timeline: [{ date: '7/5', action: 'Offer发放', detail: '常规流程' }, { date: '7/8', action: '拒绝', detail: '接受腾讯竞争offer' }] },
     ]
   }
 };

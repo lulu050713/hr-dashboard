@@ -5,7 +5,6 @@ function openDataPanel() {
   if (!panel) return;
   panel.classList.add('open');
   document.body.style.overflow = 'hidden';
-  // GSAP 动画
   if (typeof gsap !== 'undefined') {
     gsap.fromTo('.data-panel', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'power3.out' });
   }
@@ -18,12 +17,10 @@ function closeDataPanel() {
   document.body.style.overflow = '';
 }
 
-// ESC 关闭
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeDataPanel();
 });
 
-// 点击遮罩关闭
 document.addEventListener('click', function(e) {
   if (e.target.id === 'data-panel') closeDataPanel();
 });
@@ -38,10 +35,10 @@ document.addEventListener('click', function(e) {
   // === 总览卡片 ===
   const overviewHTML = `
     <div class="overview-cards">
-      <div class="ov-card"><div class="ov-value">195</div><div class="ov-label">累计推荐</div><div class="ov-sub">全岗位合计</div></div>
-      <div class="ov-card"><div class="ov-value">5-6</div><div class="ov-label">日均推荐</div><div class="ov-sub">稳态期 峰值日8人</div></div>
-      <div class="ov-card"><div class="ov-value">21</div><div class="ov-label">活跃管线</div><div class="ov-sub">5 Offer + 16 面试</div></div>
-      <div class="ov-card"><div class="ov-value">4</div><div class="ov-label">已入职</div><div class="ov-sub">7.5周内交付</div></div>
+      <div class="ov-card"><div class="ov-value">225</div><div class="ov-label">累计推荐</div><div class="ov-sub">7.5周 全岗位合计</div></div>
+      <div class="ov-card"><div class="ov-value">6.0</div><div class="ov-label">日均推荐</div><div class="ov-sub">程序3.7 + 美术7.7</div></div>
+      <div class="ov-card"><div class="ov-value">~78</div><div class="ov-label">活跃管线</div><div class="ov-sub">测试+面试各阶段</div></div>
+      <div class="ov-card"><div class="ov-value">5</div><div class="ov-label">已入职</div><div class="ov-sub">6 Offer · 1拒绝 · 5入职</div></div>
     </div>
   `;
 
@@ -51,27 +48,33 @@ document.addEventListener('click', function(e) {
     <div class="onboard-cards">
       <div class="ob-card highlight">
         <div class="ob-name">阿里P6人选</div>
-        <div class="ob-pos">程序方向</div>
+        <div class="ob-pos">后端开发</div>
         <div class="ob-salary">40万/年</div>
         <div class="ob-cycle">⚡ 10工作日三面入职</div>
+      </div>
+      <div class="ob-card highlight">
+        <div class="ob-name">外部人选</div>
+        <div class="ob-pos">测试开发</div>
+        <div class="ob-salary">78万年包</div>
+        <div class="ob-cycle">⚡ 四面完成 高薪突破</div>
       </div>
       <div class="ob-card">
         <div class="ob-name">外部人选</div>
         <div class="ob-pos">战斗策划</div>
         <div class="ob-salary">24万/年</div>
-        <div class="ob-cycle">✅ 常规入职</div>
+        <div class="ob-cycle">✅ 策划线首单</div>
       </div>
       <div class="ob-card">
         <div class="ob-name">外部人选</div>
         <div class="ob-pos">资深3D角色</div>
         <div class="ob-salary">P4级别</div>
-        <div class="ob-cycle">✅ 常规入职</div>
+        <div class="ob-cycle">✅ 美术线产出</div>
       </div>
       <div class="ob-card">
         <div class="ob-name">外部人选</div>
         <div class="ob-pos">场景原画</div>
         <div class="ob-salary">P4级别</div>
-        <div class="ob-cycle">✅ 常规入职</div>
+        <div class="ob-cycle">✅ 美术线产出</div>
       </div>
     </div>
   `;
@@ -98,26 +101,48 @@ document.addEventListener('click', function(e) {
     </tr>
   `).join('');
 
-  // === 转化漏斗 ===
+  // === 完整转化漏斗 ===
   let funnelRows = D.conversionFunnel.map(f => `
     <tr>
       <td><strong>${f.stage}</strong></td>
-      <td>${f.value}</td>
+      <td>${f.programVal}</td>
+      <td>${f.artVal}</td>
+      <td><strong>${f.total}</strong></td>
       <td>${f.rate}</td>
     </tr>
   `).join('');
 
-  // === 效率对标 ===
-  let benchRows = D.efficiencyBench.map(b => `
+  // === 面试淘汰分布 ===
+  let attritionRows = D.attrition.map(a => `
     <tr>
-      <td>${b.metric}</td>
-      <td><strong>${b.value}</strong></td>
-      <td>${b.benchmark}</td>
-      <td>${b.result}</td>
+      <td><strong>${a.stage}</strong></td>
+      <td>${a.count}</td>
+      <td>${a.reason}</td>
     </tr>
   `).join('');
 
-  // === 汇总 ===
+  // === 美术测试时间线 ===
+  let timelineRows = D.artTimeline.map(t => `
+    <tr>
+      <td><strong>${t.batch}</strong></td>
+      <td>${t.period}</td>
+      <td>${t.count}</td>
+      <td>${t.testDue}</td>
+      <td>${t.maxStage}</td>
+      <td>${t.status}</td>
+    </tr>
+  `).join('');
+
+  // === 活跃管线快照 ===
+  let pipelineRows = D.activePipeline.map(p => `
+    <tr>
+      <td><strong>${p.stage}</strong></td>
+      <td>${p.count}</td>
+      <td>${p.note}</td>
+    </tr>
+  `).join('');
+
+  // === 汇总渲染 ===
   body.innerHTML = `
     ${overviewHTML}
     ${onboardHTML}
@@ -134,26 +159,29 @@ document.addEventListener('click', function(e) {
       <tbody>${weeklyRows}</tbody>
     </table>
 
-    <h3>🔄 转化漏斗</h3>
+    <h3>🔄 完整转化漏斗</h3>
     <table class="data-table">
-      <thead><tr><th>阶段</th><th>人数</th><th>转化率</th></tr></thead>
+      <thead><tr><th>阶段</th><th>程序策划</th><th>美术</th><th>合计</th><th>转化率</th></tr></thead>
       <tbody>${funnelRows}</tbody>
     </table>
 
-    <h3>📊 效率对标</h3>
+    <h3>🎨 美术测试瓶颈时间线</h3>
     <table class="data-table">
-      <thead><tr><th>指标</th><th>实际</th><th>行业基准</th><th>判定</th></tr></thead>
-      <tbody>${benchRows}</tbody>
+      <thead><tr><th>批次</th><th>推荐时间</th><th>人数</th><th>测试回收</th><th>截至8.7最远</th><th>状态</th></tr></thead>
+      <tbody>${timelineRows}</tbody>
     </table>
 
-    <h3>⚡ 关键高光</h3>
-    <ul class="highlight-list">
-      <li><span class="hl-icon">⚡</span><span><strong>极速标杆</strong> — 阿里 P6（40万）10 工作日内三面入职，全链路跑通</span></li>
-      <li><span class="hl-icon">💰</span><span><strong>高薪推进</strong> — 测开 78 万年包（+20%涨幅）四面→谈薪中</span></li>
-      <li><span class="hl-icon">📈</span><span><strong>峰值产能</strong> — 周推荐 30 人、日推荐 8 人</span></li>
-      <li><span class="hl-icon">🎨</span><span><strong>全链路覆盖</strong> — 9 个美术细分方向 + 程序/策划/测开</span></li>
-      <li><span class="hl-icon">🤖</span><span><strong>AI 驱动</strong> — 全流程 AI 辅助寻访→评估→推荐→追踪</span></li>
-      <li><span class="hl-icon">📐</span><span><strong>数据健康</strong> — 端到端转化 2.1%、推面比 28%，均在行业基准内</span></li>
-    </ul>
+    <h3>📉 面试淘汰/流失分布</h3>
+    <table class="data-table">
+      <thead><tr><th>淘汰阶段</th><th>人数</th><th>主要原因</th></tr></thead>
+      <tbody>${attritionRows}</tbody>
+    </table>
+
+    <h3>📋 截至8.7活跃管线快照</h3>
+    <table class="data-table">
+      <thead><tr><th>阶段</th><th>人数</th><th>说明</th></tr></thead>
+      <tbody>${pipelineRows}</tbody>
+    </table>
+    <p style="text-align:center;color:#888;margin-top:8px;font-size:13px;">合计活跃 ~78人 · 大量堆积在测试环节（美术2周测试周期）</p>
   `;
 })();
