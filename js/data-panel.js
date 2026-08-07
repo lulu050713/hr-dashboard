@@ -53,25 +53,25 @@ document.addEventListener('click', function(e) {
         <div class="ob-cycle">⚡ 10工作日三面入职</div>
       </div>
       <div class="ob-card highlight">
-        <div class="ob-name">外部人选</div>
+        <div class="ob-name">阿里人选</div>
         <div class="ob-pos">测试开发</div>
         <div class="ob-salary">78万年包</div>
         <div class="ob-cycle">⚡ 四面完成 高薪突破</div>
       </div>
       <div class="ob-card">
-        <div class="ob-name">外部人选</div>
+        <div class="ob-name">腾讯人选</div>
         <div class="ob-pos">战斗策划</div>
         <div class="ob-salary">24万/年</div>
         <div class="ob-cycle">✅ 策划线首单</div>
       </div>
       <div class="ob-card">
-        <div class="ob-name">外部人选</div>
+        <div class="ob-name">英雄互娱人选</div>
         <div class="ob-pos">资深3D角色</div>
         <div class="ob-salary">P4级别</div>
         <div class="ob-cycle">✅ 美术线产出</div>
       </div>
       <div class="ob-card">
-        <div class="ob-name">外部人选</div>
+        <div class="ob-name">英雄互娱人选</div>
         <div class="ob-pos">场景原画</div>
         <div class="ob-salary">P4级别</div>
         <div class="ob-cycle">✅ 美术线产出</div>
@@ -97,20 +97,14 @@ document.addEventListener('click', function(e) {
       <td><strong>${w.week}</strong></td>
       <td><strong>${w.recommend}</strong></td>
       <td>${w.dailyAvg}/天</td>
-      <td>${w.note}</td>
     </tr>
   `).join('');
 
-  // === 完整转化漏斗 ===
-  let funnelRows = D.conversionFunnel.map(f => `
-    <tr>
-      <td><strong>${f.stage}</strong></td>
-      <td>${f.programVal}</td>
-      <td>${f.artVal}</td>
-      <td><strong>${f.total}</strong></td>
-      <td>${f.rate}</td>
-    </tr>
-  `).join('');
+  // === 完整转化漏斗 (ECharts) ===
+  const funnelData = D.conversionFunnel.filter(f => f.total !== '—').map(f => ({
+    name: f.stage,
+    value: f.total
+  }));
 
   // === 面试淘汰分布 ===
   let attritionRows = D.attrition.map(a => `
@@ -155,15 +149,12 @@ document.addEventListener('click', function(e) {
 
     <h3>📅 周度产出趋势</h3>
     <table class="data-table">
-      <thead><tr><th>周次</th><th>推荐数</th><th>日均</th><th>备注</th></tr></thead>
+      <thead><tr><th>周次</th><th>推荐数</th><th>日均</th></tr></thead>
       <tbody>${weeklyRows}</tbody>
     </table>
 
     <h3>🔄 完整转化漏斗</h3>
-    <table class="data-table">
-      <thead><tr><th>阶段</th><th>程序策划</th><th>美术</th><th>合计</th><th>转化率</th></tr></thead>
-      <tbody>${funnelRows}</tbody>
-    </table>
+    <div id="data-panel-funnel-chart" style="width:100%;height:420px;margin:12px 0 24px;"></div>
 
     <h3>🎨 美术测试瓶颈时间线</h3>
     <table class="data-table">
@@ -184,4 +175,35 @@ document.addEventListener('click', function(e) {
     </table>
     <p style="text-align:center;color:#888;margin-top:8px;font-size:13px;">合计活跃 ~78人 · 大量堆积在测试环节（美术2周测试周期）</p>
   `;
+
+  // === 渲染漏斗图 ===
+  if (typeof echarts !== 'undefined') {
+    const funnelDom = document.getElementById('data-panel-funnel-chart');
+    if (funnelDom) {
+      const funnelChart = echarts.init(funnelDom);
+      funnelChart.setOption({
+        tooltip: { trigger: 'item', formatter: '{b}: {c}人' },
+        color: ['#5470c6','#91cc75','#fac858','#ee6666','#73c0de','#3ba272','#fc8452','#9a60b4','#ea7ccc','#48b8d0','#ff9f7f','#c4ccd3','#d4e5f7'],
+        series: [{
+          type: 'funnel',
+          left: '10%',
+          top: 20,
+          bottom: 20,
+          width: '80%',
+          min: 0,
+          max: funnelData[0].value,
+          minSize: '8%',
+          maxSize: '100%',
+          sort: 'descending',
+          gap: 4,
+          label: { show: true, position: 'inside', formatter: '{b}\n{c}人', fontSize: 12 },
+          labelLine: { length: 10 },
+          itemStyle: { borderColor: '#fff', borderWidth: 1 },
+          data: funnelData
+        }]
+      });
+      const ro = new ResizeObserver(() => funnelChart.resize());
+      ro.observe(funnelDom);
+    }
+  }
 })();

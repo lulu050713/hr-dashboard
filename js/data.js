@@ -17,10 +17,10 @@ const CANDIDATE_DATA = {
   // === 入职战绩 ===
   onboarding: [
     { name: '阿里P6人选', position: '后端开发', salary: '40万/年', cycle: '10工作日三面入职', highlight: '极速标杆' },
-    { name: '外部人选', position: '测试开发', salary: '78万年包', cycle: '四面完成', highlight: '高薪突破' },
-    { name: '外部人选', position: '战斗策划', salary: '24万/年', cycle: '常规流程', highlight: '策划线首单' },
-    { name: '外部人选', position: '资深3D角色', salary: 'P4级别', cycle: '常规流程', highlight: '美术线产出' },
-    { name: '外部人选', position: '场景原画', salary: 'P4级别', cycle: '常规流程', highlight: '美术线产出' },
+    { name: '阿里人选', position: '测试开发', salary: '78万年包', cycle: '四面完成', highlight: '高薪突破' },
+    { name: '腾讯人选', position: '战斗策划', salary: '24万/年', cycle: '常规流程', highlight: '策划线首单' },
+    { name: '英雄互娱人选', position: '资深3D角色', salary: 'P4级别', cycle: '常规流程', highlight: '美术线产出' },
+    { name: '英雄互娱人选', position: '场景原画', salary: 'P4级别', cycle: '常规流程', highlight: '美术线产出' },
   ],
 
   // === 完整转化漏斗 ===
@@ -56,7 +56,7 @@ const CANDIDATE_DATA = {
 
   // === 分阶段数据 ===
   phaseData: [
-    { phase: '程序&策划期', period: '6.16-7.7 (3周)', recommend: 55, dailyAvg: '3.7', onboarded: 3, note: '程序/策划/测开，无测试环节' },
+    { phase: '程序&策划期', period: '6.16-7.7 (3周)', recommend: 55, dailyAvg: '3.7', onboarded: 3, note: '客户端开发/服务器开发/测试/测开' },
     { phase: '美术期', period: '7.7-8.7 (4.5周)', recommend: 170, dailyAvg: '7.7', onboarded: 2, note: '9个细分方向，含2周测试周期' },
   ],
 
@@ -70,14 +70,14 @@ const CANDIDATE_DATA = {
 
   // === 周度产出 ===
   weeklyActivity: [
-    { week: 'W1 (6.16-6.20)', recommend: 15, dailyAvg: '3.0', note: '程序策划启动，搭建渠道' },
-    { week: 'W2 (6.23-6.27)', recommend: 20, dailyAvg: '4.0', note: '稳态爬坡' },
-    { week: 'W3 (6.30-7.4)', recommend: 20, dailyAvg: '4.0', note: '程序稳态+策划补充' },
-    { week: 'W4 (7.7-7.11)', recommend: 30, dailyAvg: '6.0', note: '美术切入，双线并行' },
-    { week: 'W5 (7.14-7.18)', recommend: 38, dailyAvg: '7.6', note: '🔥 峰值周' },
-    { week: 'W6 (7.21-7.25)', recommend: 35, dailyAvg: '7.0', note: '稳态高位' },
-    { week: 'W7 (7.28-8.1)', recommend: 38, dailyAvg: '7.6', note: '🔥 峰值周' },
-    { week: 'W8 (8.4-8.7)', recommend: 29, dailyAvg: '7.3', note: '4天，维持高位' },
+    { week: 'W1 (6.16-6.20)', recommend: 15, dailyAvg: '3.0' },
+    { week: 'W2 (6.23-6.27)', recommend: 20, dailyAvg: '4.0' },
+    { week: 'W3 (6.30-7.4)', recommend: 20, dailyAvg: '4.0' },
+    { week: 'W4 (7.7-7.11)', recommend: 30, dailyAvg: '6.0' },
+    { week: 'W5 (7.14-7.18)', recommend: 38, dailyAvg: '7.6' },
+    { week: 'W6 (7.21-7.25)', recommend: 35, dailyAvg: '7.0' },
+    { week: 'W7 (7.28-8.1)', recommend: 38, dailyAvg: '7.6' },
+    { week: 'W8 (8.4-8.7)', recommend: 29, dailyAvg: '7.3' },
   ],
 
   // === 活跃管线快照 ===
