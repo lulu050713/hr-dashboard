@@ -48,8 +48,9 @@ const CANDIDATE_DATA = {
     { stage: '美术测试未通过', count: 26, reason: '测试作品质量不达标' },
     { stage: '一面淘汰', count: 35, reason: '技术深度不足/项目描述浅/沟通表达' },
     { stage: '二面淘汰', count: 16, reason: '风格匹配度不够/团队协作适配/主美不认可' },
+    { stage: '二面后候选人流失', count: 8, reason: '等待排面期间接受其他offer（程序5+美术3）' },
     { stage: '三面淘汰', count: 3, reason: '薪资预期差距/管理风格' },
-    { stage: '流程慢候选人流失', count: 3, reason: '二面后推进慢 候选人接受其他offer' },
+    { stage: '三面通过后谈薪流失', count: 2, reason: '薪资谈判未达一致/接受竞争offer' },
     { stage: 'HC冻结流失', count: 1, reason: '三面通过 项目公测数据不好HC暂停' },
     { stage: 'Offer拒绝', count: 1, reason: '接受腾讯竞争offer' },
   ],
@@ -86,7 +87,7 @@ const CANDIDATE_DATA = {
     { stage: '测试待评审', count: '~12', note: 'W3批次 刚回收' },
     { stage: '一面中/待约', count: '~10', note: 'W3测试通过+W2剩余' },
     { stage: '二面中/待约', count: '~5', note: 'W2批次' },
-    { stage: '三面待反馈/冻结', count: '~1', note: 'W1批次 HC暂停' },
+    { stage: '待排三面', count: '~3', note: '美术W1/W2批次 二面通过等三面' },
   ],
 
   // === 岗位分布 ===
