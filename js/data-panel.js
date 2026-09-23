@@ -35,10 +35,10 @@ document.addEventListener('click', function(e) {
   // === 总览卡片 ===
   const overviewHTML = `
     <div class="overview-cards">
-      <div class="ov-card"><div class="ov-value">225</div><div class="ov-label">累计推荐</div><div class="ov-sub">7.5周 全岗位合计</div></div>
-      <div class="ov-card"><div class="ov-value">6.0</div><div class="ov-label">日均推荐</div><div class="ov-sub">程序3.7 + 美术7.7</div></div>
-      <div class="ov-card"><div class="ov-value">~78</div><div class="ov-label">活跃管线</div><div class="ov-sub">测试+面试各阶段</div></div>
-      <div class="ov-card"><div class="ov-value">5</div><div class="ov-label">已入职</div><div class="ov-sub">6 Offer · 1拒绝 · 5入职</div></div>
+      <div class="ov-card"><div class="ov-value">445</div><div class="ov-label">电话初筛</div><div class="ov-sub">全周期445通 · 日均6.0/6.5</div></div>
+      <div class="ov-card"><div class="ov-value">285</div><div class="ov-label">累计推荐</div><div class="ov-sub">程序55 + 美术230</div></div>
+      <div class="ov-card"><div class="ov-value">13</div><div class="ov-label">Offer 发放</div><div class="ov-sub">已入职6 · 待入职3 · 放弃4</div></div>
+      <div class="ov-card"><div class="ov-value">6</div><div class="ov-label">已入职</div><div class="ov-sub">程序4 + 美术2（另3人待入职）</div></div>
     </div>
   `;
 
@@ -48,7 +48,7 @@ document.addEventListener('click', function(e) {
     <div class="onboard-cards">
       <div class="ob-card highlight">
         <div class="ob-name">阿里P6人选</div>
-        <div class="ob-pos">后端开发</div>
+        <div class="ob-pos">测试</div>
         <div class="ob-salary">40万/年</div>
         <div class="ob-cycle">⚡ 10工作日三面入职</div>
       </div>
@@ -63,6 +63,12 @@ document.addEventListener('click', function(e) {
         <div class="ob-pos">战斗策划</div>
         <div class="ob-salary">24万/年</div>
         <div class="ob-cycle">✅ 策划线首单</div>
+      </div>
+      <div class="ob-card">
+        <div class="ob-name">客户端人选</div>
+        <div class="ob-pos">客户端开发</div>
+        <div class="ob-salary">—</div>
+        <div class="ob-cycle">✅ 程序侧第 4 人入职</div>
       </div>
       <div class="ob-card">
         <div class="ob-name">英雄互娱人选</div>
@@ -101,10 +107,21 @@ document.addEventListener('click', function(e) {
   `).join('');
 
   // === 完整转化漏斗 (ECharts) ===
-  const funnelData = D.conversionFunnel.filter(f => f.total !== '—').map(f => ({
+  const funnelData = D.conversionFunnel.filter(f => f.main).map(f => ({
     name: f.stage,
     value: f.total
   }));
+
+  // === 完整转化漏斗表格 ===
+  let funnelRows = D.conversionFunnel.map(f => `
+    <tr>
+      <td><strong>${f.stage}</strong></td>
+      <td>${f.programVal}</td>
+      <td>${f.artVal}</td>
+      <td><strong>${f.total}</strong></td>
+      <td>${f.rate}</td>
+    </tr>
+  `).join('');
 
   // === 面试淘汰分布 ===
   let attritionRows = D.attrition.map(a => `
@@ -153,12 +170,16 @@ document.addEventListener('click', function(e) {
       <tbody>${weeklyRows}</tbody>
     </table>
 
-    <h3>🔄 完整转化漏斗</h3>
-    <div id="data-panel-funnel-chart" style="width:100%;height:420px;margin:12px 0 24px;"></div>
-
-    <h3>🎨 美术测试瓶颈时间线</h3>
+    <h3>🔄 完整转化漏斗（程序策划 / 美术 / 合计）</h3>
+    <div id="data-panel-funnel-chart" style="width:100%;height:420px;margin:12px 0 12px;"></div>
     <table class="data-table">
-      <thead><tr><th>批次</th><th>推荐时间</th><th>人数</th><th>测试回收</th><th>截至8.7最远</th><th>状态</th></tr></thead>
+      <thead><tr><th>阶段</th><th>程序策划期</th><th>美术期</th><th>合计</th><th>说明</th></tr></thead>
+      <tbody>${funnelRows}</tbody>
+    </table>
+
+    <h3>🎨 美术测试环节</h3>
+    <table class="data-table">
+      <thead><tr><th>环节</th><th>周期</th><th>人数</th><th>回收</th><th>通过</th><th>说明</th></tr></thead>
       <tbody>${timelineRows}</tbody>
     </table>
 
@@ -168,12 +189,12 @@ document.addEventListener('click', function(e) {
       <tbody>${attritionRows}</tbody>
     </table>
 
-    <h3>📋 截至8.7活跃管线快照</h3>
+    <h3>📊 截至 9.22 最终结果</h3>
     <table class="data-table">
-      <thead><tr><th>阶段</th><th>人数</th><th>说明</th></tr></thead>
+      <thead><tr><th>类别</th><th>人数</th><th>说明</th></tr></thead>
       <tbody>${pipelineRows}</tbody>
     </table>
-    <p style="text-align:center;color:#888;margin-top:8px;font-size:13px;">合计活跃 ~78人 · 大量堆积在测试环节（美术2周测试周期）</p>
+    <p style="text-align:center;color:#888;margin-top:8px;font-size:13px;">Offer 13 人 = 已入职 6 + 待入职 3 + 放弃 4 · 统计区间 2026.06.16 - 09.22</p>
   `;
 
   // === 渲染漏斗图 ===

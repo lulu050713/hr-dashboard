@@ -577,6 +577,47 @@ body {
 .nav-toggle.open span:nth-child(2) { opacity: 0; }
 .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
+/* === Funnel detail compact grid (细分卡片) === */
+.funnel-grid { grid-template-columns: 1fr 430px; }
+.funnel-detail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.funnel-detail .metric-card { padding: 12px; gap: 10px; }
+.funnel-detail .metric-icon { font-size: 1.1rem; width: 32px; height: 32px; }
+.funnel-detail .metric-value { font-size: 1.1rem; }
+.funnel-detail .metric-label { font-size: 0.74rem; }
+.funnel-detail .metric-sub { font-size: 0.64rem; line-height: 1.35; }
+
+/* === AI Workflow block (section 05) === */
+.ai-flow {
+  max-width: 960px; margin: 36px auto 0; background: var(--card);
+  border: 1px solid var(--border-light); border-radius: var(--radius); padding: 28px 28px 24px;
+}
+.ai-flow-head .af-badge {
+  display: inline-block; background: var(--gradient-cool); color: #fff;
+  font-size: 0.72rem; padding: 3px 12px; border-radius: 12px; font-weight: 600;
+}
+.ai-flow-head h3 { font-family: var(--font-display); font-size: 1.05rem; color: var(--primary); margin: 12px 0 8px; }
+.ai-flow-head p { font-size: 0.84rem; color: var(--muted); line-height: 1.8; }
+.ai-flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 20px 0 18px; }
+.af-step { background: #f8fafc; border: 1px solid var(--border-light); border-radius: var(--radius-sm); padding: 14px 12px; }
+.af-num {
+  display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px;
+  border-radius: 50%; background: var(--gradient-cool); color: #fff; font-size: 0.68rem; font-weight: 700; margin-bottom: 8px;
+}
+.af-step strong { display: block; font-size: 0.82rem; color: var(--primary); margin-bottom: 4px; }
+.af-step p { font-size: 0.72rem; color: var(--muted); line-height: 1.55; }
+.ai-efficiency { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.eff-card {
+  background: linear-gradient(135deg, #eef2ff, #f5f3ff); border: 1px solid #e0e7ff;
+  border-radius: var(--radius-sm); padding: 14px; text-align: center;
+}
+.eff-label { font-size: 0.7rem; color: var(--muted); margin-bottom: 8px; }
+.eff-value { font-family: var(--font-mono); font-size: 1rem; font-weight: 700; color: var(--primary); }
+.eff-before { color: #94a3b8; text-decoration: line-through; }
+.eff-arrow { margin: 0 6px; color: var(--accent-1); }
+.eff-after { color: #4f46e5; }
+.eff-sub { font-size: 0.64rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+.ai-flow-actions { text-align: center; margin-top: 20px; }
+
 /* === Responsive === */
 @media (max-width: 768px) {
   .nav-toggle { display: block; }
@@ -599,6 +640,9 @@ body {
 
   .funnel-grid { grid-template-columns: 1fr; }
   .funnel-chart { height: 300px; }
+  .ai-flow { padding: 20px 16px; }
+  .ai-flow-steps { grid-template-columns: 1fr 1fr; }
+  .ai-efficiency { grid-template-columns: 1fr; }
 
   .workflow-container { flex-direction: column; align-items: center; }
   .workflow-step { width: 100%; max-width: 300px; }

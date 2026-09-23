@@ -108,7 +108,7 @@ function initPositionChart() {
   const chart = echarts.init(dom);
 
   const option = {
-    title: { text: '岗位分布', left: 'center', top: 8, textStyle: { fontSize: 14, fontWeight: 600 } },
+    title: { text: '储备池岗位分布（600+）', left: 'center', top: 8, textStyle: { fontSize: 14, fontWeight: 600 } },
     tooltip: { trigger: 'item', formatter: '{b}: {c}人 ({d}%)' },
     legend: { bottom: 5, textStyle: { fontSize: 10 }, type: 'scroll' },
     series: [{
@@ -134,7 +134,7 @@ function initGPTChart() {
   const chart = echarts.init(dom);
 
   const option = {
-    title: { text: 'GPT人才筛选', left: 'center', top: 8, textStyle: { fontSize: 14, fontWeight: 600 } },
+    title: { text: 'GPT人才筛选（储备池 600+）', left: 'center', top: 8, textStyle: { fontSize: 14, fontWeight: 600 } },
     tooltip: { trigger: 'item', formatter: '{b}: {c}人 ({d}%)' },
     series: [{
       type: 'pie', radius: ['45%', '75%'], center: ['50%', '55%'],
@@ -142,9 +142,8 @@ function initGPTChart() {
       itemStyle: { borderRadius: 6 },
       label: { fontSize: 11, formatter: '{b}\n{c}人 ({d}%)' },
       data: [
-        { value: 78, name: 'GPT人才', itemStyle: { color: '#6366f1' } },
-        { value: 42, name: '非GPT', itemStyle: { color: '#64748b' } },
-        { value: 8, name: '待确认', itemStyle: { color: '#a855f7' } }
+        { value: 450, name: 'GPT人才', itemStyle: { color: '#6366f1' } },
+        { value: 150, name: '非GPT', itemStyle: { color: '#64748b' } }
       ]
     }]
   };

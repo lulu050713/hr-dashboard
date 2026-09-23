@@ -1,72 +1,78 @@
 // 沈婧怡 · HR Dashboard 数据文件
-// 更新时间: 2026-08-07
-// 数据来源: AI工具人才筛选表 + 汇总统计
+// 更新时间: 2026-09-22
+// 数据来源: AI工具人才筛选表 + 汇总统计（Offer 13 人口径）
 
 const CANDIDATE_DATA = {
   // === 招聘漏斗总览 ===
   pipeline: {
     stages: [
-      { name: '电话初筛', value: 350, desc: '日均9-10人' },
-      { name: '推荐业务', value: 225, desc: '日均6.0（程序3.7+美术7.7）' },
-      { name: '业务通过/约面', value: 149, desc: '程序85% / 美术60%' },
-      { name: '面试推进', value: 82, desc: '一面完成（美术含测试环节）' },
-      { name: 'Offer/入职', value: 6, desc: '5已入职 + 1拒绝' }
+      { name: '电话初筛', value: 445, desc: '全周期445通 · 日均6.0/6.5' },
+      { name: '推荐业务', value: 285, desc: '初筛→推荐 64%' },
+      { name: '业务通过/发测试', value: 190, desc: '程序85% / 美术62%' },
+      { name: '约一面', value: 115, desc: '到场112 · 未到3' },
+      { name: '一面通过', value: 58, desc: '程序53% / 美术51%' },
+      { name: '二面通过', value: 32, desc: '程序57% / 美术59%' },
+      { name: '三面通过', value: 19, desc: '程序62% / 美术58%' },
+      { name: 'Offer发放', value: 13, desc: '已入职6 · 待入职3 · 放弃4' }
     ]
   },
 
   // === 入职战绩 ===
   onboarding: [
-    { name: '阿里P6人选', position: '后端开发', salary: '40万/年', cycle: '10工作日三面入职', highlight: '极速标杆' },
+    { name: '阿里P6人选', position: '测试', salary: '40万/年', cycle: '10工作日三面入职', highlight: '极速标杆' },
     { name: '阿里人选', position: '测试开发', salary: '78万年包', cycle: '四面完成', highlight: '高薪突破' },
     { name: '腾讯人选', position: '战斗策划', salary: '24万/年', cycle: '常规流程', highlight: '策划线首单' },
     { name: '英雄互娱人选', position: '资深3D角色', salary: 'P4级别', cycle: '常规流程', highlight: '美术线产出' },
     { name: '英雄互娱人选', position: '场景原画', salary: 'P4级别', cycle: '常规流程', highlight: '美术线产出' },
+    { name: '程序侧客户端', position: '客户端开发', salary: '—', cycle: '常规流程', highlight: '程序侧第4人' },
   ],
 
   // === 完整转化漏斗 ===
   conversionFunnel: [
-    { stage: '电话初筛', programVal: 90, artVal: 260, total: 350, rate: '—' },
-    { stage: '推荐业务', programVal: 55, artVal: 170, total: 225, rate: '64%' },
-    { stage: '业务通过', programVal: 47, artVal: 102, total: 149, rate: '程序85%/美术60%' },
-    { stage: '测试回收(美术)', programVal: '—', artVal: 78, total: '—', rate: '完成率76%' },
-    { stage: '测试通过/约一面', programVal: 47, artVal: 52, total: 99, rate: '美术通过67%' },
-    { stage: '一面完成', programVal: 42, artVal: 40, total: 82, rate: '—' },
-    { stage: '一面通过→二面', programVal: 25, artVal: 22, total: 47, rate: '程序60%/美术55%' },
-    { stage: '二面完成', programVal: 23, artVal: 16, total: 39, rate: '—' },
-    { stage: '二面通过', programVal: 14, artVal: 9, total: 23, rate: '程序61%/美术56%' },
-    { stage: '三面/终面', programVal: 9, artVal: 3, total: 12, rate: '—' },
-    { stage: '三面通过', programVal: 6, artVal: 3, total: 9, rate: '程序67%/美术100%' },
-    { stage: 'Offer发放', programVal: 4, artVal: 2, total: 6, rate: '—' },
-    { stage: 'Offer拒绝', programVal: 1, artVal: 0, total: 1, rate: '—' },
-    { stage: '已入职', programVal: 3, artVal: 2, total: 5, rate: '—' },
+    { stage: '电话初筛', programVal: 90, artVal: 355, total: 445, rate: '—', main: true },
+    { stage: '推荐业务', programVal: 55, artVal: 230, total: 285, rate: '初筛→推荐64%', main: true },
+    { stage: '业务通过/发测试', programVal: '47 (85%)', artVal: '143 (62%)', total: 190, rate: '程序85%/美术62%', main: true },
+    { stage: '测试回收(美术)', programVal: '—', artVal: '114 (80%)', total: 114, rate: '20%候选人放弃测试' },
+    { stage: '测试通过/约一面', programVal: '47 (无测试)', artVal: '68 (48%)', total: 115, rate: '占发测试48%', main: true },
+    { stage: '一面完成(到场)', programVal: 45, artVal: 67, total: 112, rate: '未到面3人', main: true },
+    { stage: '一面通过→二面', programVal: '24 (53%)', artVal: '34 (51%)', total: 58, rate: '程序53%/美术51%', main: true },
+    { stage: '二面完成(到场)', programVal: 23, artVal: 32, total: 55, rate: '未到面3人', main: true },
+    { stage: '二面通过', programVal: '13 (57%)', artVal: '19 (59%)', total: 32, rate: '程序57%/美术59%', main: true },
+    { stage: '二面后候选人流失', programVal: 2, artVal: 3, total: 5, rate: '等待期间接受其他offer' },
+    { stage: '三面/终面', programVal: 11, artVal: 16, total: 27, rate: '—', main: true },
+    { stage: '三面淘汰', programVal: 3, artVal: 5, total: 8, rate: '薪资预期/管理风格' },
+    { stage: '三面通过', programVal: '8 (62%)', artVal: '11 (58%)', total: 19, rate: '程序62%/美术58%', main: true },
+    { stage: '谈薪流失', programVal: 1, artVal: 2, total: 3, rate: '薪资未达一致' },
+    { stage: 'HC冻结流失', programVal: 1, artVal: 2, total: 3, rate: '岗位缩减/暂停，非候选人原因' },
+    { stage: 'Offer发放', programVal: 6, artVal: 7, total: 13, rate: '—', main: true },
+    { stage: 'Offer放弃/拒绝', programVal: 2, artVal: 2, total: 4, rate: '接受竞对offer' },
+    { stage: '已入职', programVal: 4, artVal: 2, total: 6, rate: '另待入职3人', main: true },
   ],
 
   // === 面试淘汰/流失分布 ===
   attrition: [
-    { stage: '业务不通过', count: 76, reason: '项目经历不匹配/岗位风格不符/资历不够' },
-    { stage: '美术测试未完成', count: 24, reason: '2周周期内放弃或未按时提交' },
-    { stage: '美术测试未通过', count: 26, reason: '测试作品质量不达标' },
-    { stage: '一面淘汰', count: 35, reason: '技术深度不足/项目描述浅/沟通表达' },
-    { stage: '二面淘汰', count: 16, reason: '风格匹配度不够/团队协作适配/主美不认可' },
-    { stage: '二面后候选人流失', count: 8, reason: '等待排面期间接受其他offer（程序5+美术3）' },
-    { stage: '三面淘汰', count: 3, reason: '薪资预期差距/管理风格' },
-    { stage: '三面通过后谈薪流失', count: 2, reason: '薪资谈判未达一致/接受竞争offer' },
-    { stage: 'HC冻结流失', count: 1, reason: '三面通过 项目公测数据不好HC暂停' },
-    { stage: 'Offer拒绝', count: 1, reason: '接受腾讯竞争offer' },
+    { stage: '业务不通过', count: 95, reason: '项目经历不匹配/岗位风格不符/资历不够' },
+    { stage: '美术测试未完成', count: 29, reason: '2周周期内放弃或未按时提交' },
+    { stage: '美术测试未通过', count: 46, reason: '测试作品质量不达标' },
+    { stage: '一面淘汰(含未到面)', count: 57, reason: '技术深度不足/沟通表达/未按时面试' },
+    { stage: '二面淘汰(含未到面)', count: 26, reason: '风格匹配度不够/团队协作适配/主美不认可' },
+    { stage: '候选人流失(二面后)', count: 5, reason: '等待排面期间接受其他offer（程序2+美术3）' },
+    { stage: '三面淘汰', count: 8, reason: '薪资预期差距/管理风格' },
+    { stage: '谈薪流失', count: 3, reason: '薪资谈判未达一致/接受竞争offer' },
+    { stage: 'HC冻结流失', count: 3, reason: '项目公测数据不好/岗位暂停，非候选人原因' },
+    { stage: 'Offer放弃/拒绝', count: 4, reason: '接受竞对offer' },
   ],
 
   // === 分阶段数据 ===
   phaseData: [
-    { phase: '程序&策划期', period: '6.16-7.7 (3周)', recommend: 55, dailyAvg: '3.7', onboarded: 3, note: '客户端开发/服务器开发/测试/测开' },
-    { phase: '美术期', period: '7.7-8.7 (4.5周)', recommend: 170, dailyAvg: '7.7', onboarded: 2, note: '9个细分方向，含2周测试周期' },
+    { phase: '程序&策划期', period: '6.16-7.7 (3周)', recommend: 55, dailyAvg: '3.7', onboarded: 4, note: '测开/测试/客户端/战斗策划' },
+    { phase: '美术期', period: '7.7-9.22 (含收尾)', recommend: 230, dailyAvg: '4.2', onboarded: 2, note: '生产期日均5.0；另3人待入职（动作/技术美术/美宣）' },
   ],
 
   // === 美术测试瓶颈时间线 ===
   artTimeline: [
-    { batch: 'W1批', period: '7.7-7.11', count: 30, testDue: '~7.23', maxStage: '三面/Offer', status: '2人入职 1人冻结流失' },
-    { batch: 'W2批', period: '7.14-7.18', count: 38, testDue: '~7.30', maxStage: '一面/二面', status: '部分二面中 流程变慢' },
-    { batch: 'W3批', period: '7.21-7.25', count: 35, testDue: '~8.6', maxStage: '测试刚过/开始一面', status: '刚进入面试' },
-    { batch: 'W4批', period: '7.28-8.7', count: 67, testDue: '8.7之后', maxStage: '测试制作中', status: '大量堆积' },
+    { batch: '美术测试发放', period: '7.7-9.22', count: 143, testDue: '回收 114（80%）', maxStage: '通过 68', status: '通过率 48%（含2周制作周期）' },
+    { batch: '测试淘汰构成', period: '7.7-9.22', count: 75, testDue: '未完成 29', maxStage: '未通过 46', status: '放弃/超时 29 + 质量不达标 46' },
   ],
 
   // === 周度产出 ===
@@ -74,42 +80,44 @@ const CANDIDATE_DATA = {
     { week: 'W1 (6.16-6.20)', recommend: 15, dailyAvg: '3.0' },
     { week: 'W2 (6.23-6.27)', recommend: 20, dailyAvg: '4.0' },
     { week: 'W3 (6.30-7.4)', recommend: 20, dailyAvg: '4.0' },
-    { week: 'W4 (7.7-7.11)', recommend: 30, dailyAvg: '6.0' },
-    { week: 'W5 (7.14-7.18)', recommend: 38, dailyAvg: '7.6' },
-    { week: 'W6 (7.21-7.25)', recommend: 35, dailyAvg: '7.0' },
-    { week: 'W7 (7.28-8.1)', recommend: 38, dailyAvg: '7.6' },
-    { week: 'W8 (8.4-8.7)', recommend: 29, dailyAvg: '7.3' },
+    { week: 'W4 (7.7-7.11)', recommend: 24, dailyAvg: '4.8' },
+    { week: 'W5 (7.14-7.18)', recommend: 25, dailyAvg: '5.0' },
+    { week: 'W6 (7.21-7.25)', recommend: 25, dailyAvg: '5.0' },
+    { week: 'W7 (7.28-8.1)', recommend: 25, dailyAvg: '5.0' },
+    { week: 'W8 (8.4-8.8)', recommend: 25, dailyAvg: '5.0' },
+    { week: 'W9 (8.11-8.15)', recommend: 25, dailyAvg: '5.0' },
+    { week: 'W10 (8.18-8.22)', recommend: 25, dailyAvg: '5.0' },
+    { week: 'W11 (8.25-8.29)', recommend: 25, dailyAvg: '5.0' },
+    { week: 'W12 (9.1-9.5)', recommend: 25, dailyAvg: '5.0' },
+    { week: 'W13 (9.8-9.22 收尾)', recommend: 6, dailyAvg: '0.6' },
   ],
 
   // === 活跃管线快照 ===
   activePipeline: [
-    { stage: '测试制作中', count: '~50', note: 'W4批次为主 测试未到期' },
-    { stage: '测试待评审', count: '~12', note: 'W3批次 刚回收' },
-    { stage: '一面中/待约', count: '~10', note: 'W3测试通过+W2剩余' },
-    { stage: '二面中/待约', count: '~5', note: 'W2批次' },
-    { stage: '待排三面', count: '~3', note: '美术W1/W2批次 二面通过等三面' },
+    { stage: '程序侧 Offer', count: 6, note: '已入职4（测开/测试/客户端/战斗策划）· 放弃2' },
+    { stage: '美术侧 Offer', count: 7, note: '已入职2（3D角色/场景原画）· 待入职3 · 放弃2' },
+    { stage: '合计 Offer', count: 13, note: '已入职6 / 待入职3 / 放弃4' },
   ],
 
   // === 岗位分布 ===
   positions: [
-    { name: '角色原画', value: 35 },
-    { name: '3D角色', value: 30 },
-    { name: '程序/测开', value: 25 },
-    { name: 'UI设计', value: 25 },
-    { name: '3D场景', value: 24 },
-    { name: '场景原画', value: 22 },
-    { name: '地编', value: 18 },
-    { name: '动作', value: 16 },
-    { name: '策划', value: 10 },
-    { name: '特效', value: 10 },
-    { name: 'TA/灯光/关卡/其他', value: 10 }
+    { name: '角色原画', value: 95 },
+    { name: '3D角色', value: 82 },
+    { name: '程序/测开', value: 68 },
+    { name: 'UI设计', value: 68 },
+    { name: '3D场景', value: 65 },
+    { name: '场景原画', value: 60 },
+    { name: '地编', value: 49 },
+    { name: '动作', value: 44 },
+    { name: '策划', value: 27 },
+    { name: '特效', value: 27 },
+    { name: 'TA/灯光/关卡/其他', value: 15 }
   ],
 
   // === GPT 人才统计 ===
   gpt: [
-    { name: 'GPT人才', value: 138 },
-    { name: '非GPT', value: 70 },
-    { name: '待确认', value: 17 }
+    { name: 'GPT人才', value: 450 },
+    { name: '非GPT', value: 150 }
   ],
 
   // === GPT 层级分布 ===
