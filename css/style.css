@@ -577,15 +577,6 @@ body {
 .nav-toggle.open span:nth-child(2) { opacity: 0; }
 .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-/* === Funnel detail compact grid (细分卡片) === */
-.funnel-grid { grid-template-columns: 1fr 430px; }
-.funnel-detail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-.funnel-detail .metric-card { padding: 12px; gap: 10px; }
-.funnel-detail .metric-icon { font-size: 1.1rem; width: 32px; height: 32px; }
-.funnel-detail .metric-value { font-size: 1.1rem; }
-.funnel-detail .metric-label { font-size: 0.74rem; }
-.funnel-detail .metric-sub { font-size: 0.64rem; line-height: 1.35; }
-
 /* === AI Workflow block (section 05) === */
 .ai-flow {
   max-width: 960px; margin: 36px auto 0; background: var(--card);

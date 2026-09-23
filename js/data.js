@@ -6,14 +6,14 @@ const CANDIDATE_DATA = {
   // === 招聘漏斗总览 ===
   pipeline: {
     stages: [
-      { name: '电话初筛', value: 445, desc: '全周期445通 · 日均6.0/6.5' },
+      { name: '电话初筛', value: 445, desc: '全周期445通' },
       { name: '推荐业务', value: 285, desc: '初筛→推荐 64%' },
-      { name: '业务通过/发测试', value: 190, desc: '程序85% / 美术62%' },
-      { name: '约一面', value: 115, desc: '到场112 · 未到3' },
-      { name: '一面通过', value: 58, desc: '程序53% / 美术51%' },
-      { name: '二面通过', value: 32, desc: '程序57% / 美术59%' },
-      { name: '三面通过', value: 19, desc: '程序62% / 美术58%' },
-      { name: 'Offer发放', value: 13, desc: '已入职6 · 待入职3 · 放弃4' }
+      { name: '业务通过', value: 190, desc: '推荐→通过 67%' },
+      { name: '一面', value: 115, desc: '进入面试环节' },
+      { name: '二面', value: 58, desc: '约二面 58人' },
+      { name: '三面', value: 27, desc: '三面/终面' },
+      { name: '谈薪', value: 19, desc: '进入谈薪 19人' },
+      { name: 'Offer', value: 13, desc: 'Offer发放' }
     ]
   },
 
