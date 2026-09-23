@@ -138,7 +138,6 @@ function initGPTChart() {
     tooltip: { trigger: 'item', formatter: '{b}: {c}人 ({d}%)' },
     series: [{
       type: 'pie', radius: ['45%', '75%'], center: ['50%', '55%'],
-      roseType: 'area',
       itemStyle: { borderRadius: 6 },
       label: { fontSize: 11, formatter: '{b}\n{c}人 ({d}%)' },
       data: [
@@ -146,38 +145,6 @@ function initGPTChart() {
         { value: 150, name: '非GPT', itemStyle: { color: '#64748b' } }
       ]
     }]
-  };
-  chart.setOption(option);
-  window.addEventListener('resize', () => chart.resize());
-}
-
-// ==========================================
-// 5. Daily Activity Trend
-// ==========================================
-function initTrendChart() {
-  const dom = document.getElementById('trend-chart');
-  if (!dom) return;
-  const chart = echarts.init(dom);
-  const { dates, newCandidates, calls } = CANDIDATE_DATA.dailyActivity;
-
-  const option = {
-    title: { text: '每日招聘活跃度', left: 'center', top: 8, textStyle: { fontSize: 14, fontWeight: 600 } },
-    tooltip: { trigger: 'axis' },
-    legend: { data: ['新增人选', '电话沟通'], bottom: 5 },
-    grid: { left: 50, right: 50, top: 50, bottom: 40 },
-    xAxis: { type: 'category', data: dates, axisLabel: { rotate: 30, fontSize: 10 } },
-    yAxis: { type: 'value', axisLabel: { fontSize: 10 } },
-    series: [
-      {
-        name: '新增人选', type: 'bar', data: newCandidates,
-        itemStyle: { color: '#6366f1', borderRadius: [6,6,0,0] }, barWidth: 14
-      },
-      {
-        name: '电话沟通', type: 'line', data: calls,
-        smooth: true, lineStyle: { color: '#a855f7', width: 2.5 },
-        symbol: 'circle', symbolSize: 5, itemStyle: { color: '#a855f7' }
-      }
-    ]
   };
   chart.setOption(option);
   window.addEventListener('resize', () => chart.resize());
@@ -194,5 +161,4 @@ document.addEventListener('DOMContentLoaded', () => {
   initFunnelChart();
   initPositionChart();
   initGPTChart();
-  initTrendChart();
 });
