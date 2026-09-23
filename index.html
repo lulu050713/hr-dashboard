@@ -86,45 +86,76 @@
     </div>
     <div class="funnel-grid">
       <div class="funnel-chart" id="funnel-chart"></div>
-      <div class="funnel-detail">
-        <div class="metric-card accent-blue">
+      <div class="funnel-detail" id="funnel-cards">
+        <div class="metric-card accent-blue" data-card="screening">
           <div class="metric-icon">📞</div>
           <div class="metric-body">
             <div class="metric-value">445</div>
             <div class="metric-label">电话初筛</div>
             <div class="metric-sub">全周期445通</div>
           </div>
+          <div class="metric-expand">
+            <p>初筛 → 推荐：<b>285 人（64%）</b></p>
+            <p>流失主要因：不匹配 / 无意向 / 联系不上</p>
+          </div>
         </div>
-        <div class="metric-card accent-green">
+        <div class="metric-card accent-green" data-card="referral">
           <div class="metric-icon">📋</div>
           <div class="metric-body">
             <div class="metric-value">285</div>
             <div class="metric-label">推荐业务</div>
             <div class="metric-sub">初筛→推荐 64%</div>
           </div>
+          <div class="metric-expand">
+            <p>端到端转化：<b>4.6%</b>（13 / 285）</p>
+            <p>日均推荐：约 <b>4.2 人</b>/工作日</p>
+          </div>
         </div>
-        <div class="metric-card accent-orange">
+        <div class="metric-card accent-orange" data-card="pass">
           <div class="metric-icon">✅</div>
           <div class="metric-body">
             <div class="metric-value">190</div>
             <div class="metric-label">业务通过</div>
             <div class="metric-sub">推荐→通过 67%</div>
           </div>
+          <div class="metric-expand">
+            <p>通过 190 / 推荐 285 = <b>67%</b></p>
+            <p>淘汰主因：项目经历不匹配 / 风格不符（95 人）</p>
+          </div>
         </div>
-        <div class="metric-card accent-purple">
+        <div class="metric-card accent-purple" data-card="interview">
           <div class="metric-icon">🎬</div>
           <div class="metric-body">
             <div class="metric-value">115</div>
             <div class="metric-label">面试</div>
             <div class="metric-sub">进入面试环节</div>
           </div>
+          <div class="metric-expand">
+            <p>一面通过率 <b>51%</b> · 二面 <b>59%</b> · 三面 <b>70%</b></p>
+            <p>淘汰 TOP2：技术深度/沟通表达（57）· 风格匹配（26）</p>
+          </div>
         </div>
-        <div class="metric-card accent-red">
+        <div class="metric-card accent-red" data-card="offer">
           <div class="metric-icon">🎯</div>
           <div class="metric-body">
             <div class="metric-value">13</div>
             <div class="metric-label">Offer</div>
             <div class="metric-sub">Offer发放</div>
+          </div>
+          <div class="metric-expand offer-expand">
+            <div class="offer-group">
+              <p class="og-title">🟢 已入职 6</p>
+              <p class="og-list">测开发（阿里）· 测试（阿里P6）· 战斗策划（腾讯）</p>
+              <p class="og-list">客户端 · 3D角色（英雄互娱）· 场景原画（英雄互娱）</p>
+            </div>
+            <div class="offer-group">
+              <p class="og-title">🟡 待入职 3</p>
+              <p class="og-list">动作 · 技术美术 · 美宣</p>
+            </div>
+            <div class="offer-group">
+              <p class="og-title">🔴 放弃 4</p>
+              <p class="og-list">程序×2 · 美术×2（接竞对 offer）</p>
+            </div>
           </div>
         </div>
       </div>
@@ -532,6 +563,20 @@
   <script src="js/animations.js?v=0923"></script>
   <script src="js/interactions.js?v=0923"></script>
   <script src="js/data-panel.js?v=0923"></script>
+
+<script>
+(function(){
+  var container = document.getElementById('funnel-cards');
+  if(!container) return;
+  container.addEventListener('click', function(e){
+    var card = e.target.closest('.metric-card');
+    if(!card) return;
+    var was = card.classList.contains('expanded');
+    container.querySelectorAll('.metric-card').forEach(function(c){ c.classList.remove('expanded'); });
+    if(!was) card.classList.add('expanded');
+  });
+})();
+</script>
 
 </body>
 </html>

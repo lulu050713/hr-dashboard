@@ -839,3 +839,26 @@ body {
   .data-table { font-size: 0.75rem; }
   .data-table th, .data-table td { padding: 8px 10px; }
 }
+
+/* === 漏斗卡片展开 === */
+#funnel-cards .metric-card { cursor: pointer; position: relative; flex-wrap: wrap; }
+#funnel-cards .metric-card::after {
+  content: '▼'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font-size: 0.6rem; color: var(--muted); transition: transform 0.3s;
+}
+#funnel-cards .metric-card.expanded::after { transform: translateY(-50%) rotate(180deg); }
+.metric-expand {
+  width: 100%; max-height: 0; overflow: hidden; transition: max-height 0.35s ease;
+  padding-left: 54px; box-sizing: border-box;
+}
+.metric-expand p { margin: 0 0 4px; font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+.metric-expand p b { color: var(--text); }
+.metric-card.expanded .metric-expand { max-height: 260px; padding-top: 10px; padding-bottom: 2px; }
+.offer-expand .offer-group { margin-bottom: 8px; }
+.offer-expand .offer-group:last-child { margin-bottom: 0; }
+.offer-expand .og-title { font-size: 0.78rem; font-weight: 600; color: var(--text); margin: 0 0 3px; }
+.offer-expand .og-list { font-size: 0.72rem; color: var(--muted); margin: 0; }
+
+@media (max-width: 768px) {
+  .metric-expand { padding-left: 0; }
+}
