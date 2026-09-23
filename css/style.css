@@ -155,7 +155,7 @@ body {
 .funnel-grid {
   display: grid; grid-template-columns: 1fr 360px; gap: 32px; align-items: start;
 }
-.funnel-chart { height: 420px; }
+.funnel-chart { height: 520px; }
 .funnel-detail { display: flex; flex-direction: column; gap: 12px; }
 .metric-card {
   display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: var(--radius-sm);
